@@ -1,7 +1,7 @@
 import express from 'express';
 
-import db from './src/services/db'
-import storesRoute from './src/routes/stores';
+import db from './services/db'
+import storesRoute from './routes/stores';
 import bodyParser from 'body-parser';
 
 var app = express();

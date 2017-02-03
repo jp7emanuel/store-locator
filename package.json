@@ -52,15 +52,19 @@
     "babel-preset-stage-0": "^6.22.0",
     "body-parser": "^1.16.0",
     "connect": "^3.5.0",
+    "laravel-elixir": "^6.0.0-15",
     "mongodb": "^2.2.22",
     "mongoose": "^4.8.1",
     "nodemon": "^1.11.0",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-router": "^4.0.0-alpha.6",
+    "redux-form": "^6.5.0",
+    "semantic-ui": "^2.2.7"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start": "gulp && node scripts/start.js",
+    "build": "gulp --production && node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "server": "./node_modules/.bin/nodemon src/server.js --exec ./node_modules/.bin/babel-node --presets es2015,stage-0"
   },
