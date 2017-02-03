@@ -1,5 +1,5 @@
 import express from 'express';
-
+import Store from '../models/store';
 let router = express.Router();
 
 router.get('/', (req, res, next) => {

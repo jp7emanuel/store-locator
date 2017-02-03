@@ -15,7 +15,7 @@ const storeSchema = new mongoose.Schema({
   time: {
     open: Date,
     close: Date
-  }
+  },
   location: {
     lat: Number,
     lng: Number
