@@ -62,7 +62,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "server": "./node_modules/.bin/nodemon server.js --exec ./node_modules/.bin/babel-node --presets es2015,stage-0"
+    "server": "./node_modules/.bin/nodemon src/server.js --exec ./node_modules/.bin/babel-node --presets es2015,stage-0"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -92,7 +92,8 @@
     "presets": [
       "react-app",
       "es2015",
-      "stage-0"
+      "stage-0",
+      "react"
     ]
   },
   "eslintConfig": {
