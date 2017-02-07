@@ -10,7 +10,6 @@ const Routes = () => (
   <div>
     <Match exactly pattern="/" component={StoresIndex} />
     <Match exactly pattern="/create" component={StoresCreate} />
-    <Match exactly pattern="/search" component={StoresSearch} />
 
     <Miss render={ErrorMessage} />
   </div>
