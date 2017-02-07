@@ -5,21 +5,24 @@ const storeSchema = new mongoose.Schema({
     type: String,
     index: true
   },
-  country: String,
-  state:   String,
-  city:   String,
+  address: String,
   telephone: String,
   image: String,
-  type: String,
-  description: String,
-  time: {
-    open: Date,
-    close: Date
+  type: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'StoreType'
   },
+  description: String,
   location: {
     lat: Number,
     lng: Number
   }
 });
+
+storeSchema.path('name').required(true, 'O campo Nome é obrigatório.');
+storeSchema.path('address').required(true, 'O campo Endereço é obrigatório.');
+storeSchema.path('telephone').required(true, 'O Telefone nome é obrigatório.');
+storeSchema.path('type').required(true, 'O campo Tipo é obrigatório.');
+storeSchema.path('description').required(true, 'O campo Descrição é obrigatório.');
 
 export default mongoose.model('Store', storeSchema);

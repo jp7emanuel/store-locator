@@ -1,15 +1,16 @@
 import React from 'react';
-import BrowserRouter from 'react-router/BrowserRouter';
 import Match from 'react-router/Match';
 import Miss from 'react-router/Miss';
 
-import App from '../components/app';
 import StoresIndex from '../components/stores';
+import StoresCreate from '../components/stores/create';
 import ErrorMessage from '../components/errors';
 
 const Routes = () => (
   <div>
     <Match exactly pattern="/" component={StoresIndex} />
+    <Match exactly pattern="/create" component={StoresCreate} />
+    <Match exactly pattern="/search" component={StoresSearch} />
 
     <Miss render={ErrorMessage} />
   </div>

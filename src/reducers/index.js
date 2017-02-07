@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import StoresReducer from './stores';
 import { reducer as formReducer } from 'redux-form';
+import StoresReducer from './stores';
+import StoreTypesReducer from './store-types';
 
 const rootReducer = combineReducers({
+  form: formReducer,
   stores: StoresReducer,
-  form: formReducer
+  storeTypes: StoreTypesReducer
 });
 
 export default rootReducer;

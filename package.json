@@ -54,7 +54,9 @@
     "body-parser": "^1.16.0",
     "bulma": "^0.3.1",
     "connect": "^3.5.0",
+    "cors": "^2.8.1",
     "font-awesome": "^4.7.0",
+    "google-map-react": "^0.22.3",
     "gulp": "^3.9.1",
     "history": "^4.5.1",
     "laravel-elixir": "^6.0.0-15",
@@ -68,7 +70,7 @@
     "react-router": "4.0.0-alpha.6",
     "redux": "^3.6.0",
     "redux-form": "^6.5.0",
-    "redux-promise": "^0.5.3",
+    "redux-promise-middleware": "^4.2.0",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {

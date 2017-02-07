@@ -9,12 +9,9 @@ class App extends Component {
         <nav className="nav has-shadow">
           <div className="container">
             <div className="nav-left">
-              <a href="#" className="nav-item">
-                <img src="/img/logo.svg" alt="Logo" />
-              </a>
-              <span className="nav-item">
-                CI Store Locator
-              </span>
+              <Link to="/" className="nav-item">
+                <span className="icon"><i className="fa fa-compass"></i> Store Locator</span>
+              </Link>
             </div>
             <div className="nav-right nav-menu">
               <Link to="/create" className="nav-item">

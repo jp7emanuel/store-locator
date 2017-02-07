@@ -1,29 +1,40 @@
-import { FETCH_HAS_ERRORED, FETCH_STORES } from '../actions/index';
-import { update } from 'react-addons-update';
+import { REQUEST_REJECTED, FETCH_STORES, REQUEST_LOADING, CREATE_STORE } from '../actions/stores';
+
 const INITIAL_STATE = {
   all: [],
   store: null,
-  isLoading: true,
-  error: false
+  fetching: false,
+  fetched: false,
+  error: null,
 };
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
-    case FETCH_HAS_ERRORED:
-    return update(state, {
-        $merge: {
-          isLoading: false,
-          error: true
-        }
-      });
+    case REQUEST_LOADING:
+      return {
+        ...state,
+        fetching: true,
+        fetched: false
+      };
+    case REQUEST_REJECTED:
+      return {
+        ...state,
+        fetching: false,
+        fetched: false,
+        error: action.payload.data
+      };
     case FETCH_STORES:
-      return update(state, {
-        $merge: {
-          all: action.payload.data,
-          isLoading: false,
-          error: false
-        }
-      });
+      return {
+        ...state,
+        all: action.payload.data,
+        fetching: false,
+        fetched: true,
+      };
+    case CREATE_STORE:
+      return {
+        ...state,
+        store: action.payload.data
+      };
     default:
       return state;
   }

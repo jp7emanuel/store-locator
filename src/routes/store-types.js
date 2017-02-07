@@ -1,5 +1,4 @@
 import express from 'express';
-import Store from '../models/store';
 import StoreType from '../models/store-types';
 import _ from 'lodash';
 import cors from 'cors';
@@ -7,22 +6,21 @@ import cors from 'cors';
 let router = express.Router();
 router.all('*', cors());
 
-router.get('/stores', (req, res, next) => {
+router.get('/store-types', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 
-  Store.find()
+  StoreType.find()
     .then(doc => {
-      res.status(201).json(doc);
+      res.status(200).json(doc);
     });
 });
 
-router.post('/stores', (req, res, next) => {
+router.post('/store-types', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
-  let store = new Store(req.body.data);
-
+  let store = _.merge(new StoreType(), req);
   store.save()
     .then( data => {
       res.status(200).json(data);
@@ -30,31 +28,14 @@ router.post('/stores', (req, res, next) => {
     .catch(e => next(e));
 });
 
-router.get('/stores/:id', (req, res, next) => {
+router.put('/store-types/:id', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 
-  Store.find({ id_slug: req.id_slug }, (err, store) => {
+  StoreType.findOne({ _id: req._id }, (err, store) => {
     if (err) {
       return res.status(500).send(err);
     }
-
-    return res.status(201).send(store);
-  });
-});
-
-router.put('/stores/:id', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-
-  Store.findOne({ id_slug: req.id_slug }, (err, store) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    // store.title = req.body.title || store.title;
-    // store.description = req.body.description || store.description;
-    // store.price = req.body.price || store.price;
-    // store.completed = req.body.completed || store.completed;
 
     store.save((err, store) => {
       if (err) {
@@ -66,11 +47,11 @@ router.put('/stores/:id', (req, res, next) => {
   });
 });
 
-router.delete('/stores/:id', (req, res, next) => {
+router.delete('/store-types/:id', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 
-  Store.findOneAndRemove({ id_slug: req.id_slug }, (err, store) => {
+  StoreType.findOneAndRemove({ _id: req._id }, (err, store) => {
     if (err) {
       return res.status(500).send(err);
     }

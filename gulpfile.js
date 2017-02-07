@@ -2,7 +2,7 @@ var elixir = require('laravel-elixir');
 
 elixir((mix) => {
   mix.sass([
-    './node_modules/bulma/css/bulma.css',
+    './src/assets/sass/app.scss',
     './node_modules/font-awesome/css/font-awesome.css'
   ], 'public/css/app.css');
 

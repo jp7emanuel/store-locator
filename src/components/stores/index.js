@@ -8,7 +8,6 @@ const styles = {
     position: "relative"
   },
   locationSearch: {
-    backgroundColor: 'white',
     position: "absolute",
     top: 40,
     left: window.innerWidth < 920 ? (window.innerWidth-inputSize)/2 : 50
@@ -27,6 +26,9 @@ const styles = {
   icon: {
     border: "none",
     top: "1.40rem"
+  },
+  figure: {
+    marginTop: 5
   }
 }
 
@@ -34,7 +36,9 @@ class StoresIndex extends Component {
   render() {
     return (
       <div className="container" style={styles.container}>
-        <img alt="Background" src="/img/background.jpg" />
+        <figure className="image is-2by1" style={styles.figure}>
+          <img alt="Background" src="/img/background.jpg" />
+        </figure>
         <div style={styles.locationSearch}>
           <div>
             <a className="button" style={styles.button}>
