@@ -10,8 +10,6 @@ const styles = {
 
 class StoresIndex extends Component {
   render() {
-    const { markers } = this.props;
-
     return (
       <div className="container" style={styles.container}>
         <MapsContainer />

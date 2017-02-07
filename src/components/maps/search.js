@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import Geosuggest from 'react-geosuggest';
 const inputSize = 280;
 
 const styles = {
   locationSearch: {
     position: "absolute",
-    top: 40,
+    top: 50,
     left: window.innerWidth < 920 ? (window.innerWidth-inputSize)/2 : 50
   },
   button: {
@@ -25,8 +25,10 @@ const styles = {
   }
 }
 
-
 class MapsSearch extends Component {
+  onSuggestSelect(suggest) {
+    console.log(suggest);
+  }
   render() {
     return (
       <div style={styles.locationSearch}>
@@ -40,12 +42,17 @@ class MapsSearch extends Component {
         </div>
 
         <form>
-          <p className="control has-icon has-icon-right">
-            <input className="input is-medium" type="email" placeholder="Digite sua localização.." style={styles.input}/>
+          <div className="control has-icon has-icon-right">
+            <Geosuggest
+              className="input is-medium"
+              placeholder="Digite sua localização.."
+              onSuggestSelect={this.onSuggestSelect}
+              style={styles.input}
+            />
             <span className="icon" style={styles.icon}>
               <i className="fa fa-search"></i>
             </span>
-          </p>
+          </div>
         </form>
       </div>
     );

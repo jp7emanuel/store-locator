@@ -65,6 +65,7 @@
     "react": "^15.4.2",
     "react-addons-update": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-geosuggest": "^2.1.0",
     "react-google-maps": "beta",
     "react-redux": "^5.0.2",
     "react-router": "4.0.0-alpha.6",

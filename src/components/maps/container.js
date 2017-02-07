@@ -3,6 +3,14 @@ import { connect } from 'react-redux';
 import MapsIndex from './index';
 import { requestMarkers } from '../../actions/maps';
 
+function renderImage() {
+  return (
+    <figure className="image is-2by1">
+      <img alt="Background" src="/img/background.jpg" />
+    </figure>
+  );
+}
+
 class MapsContainer extends Component {
   componentWillMount() {
     this.props.requestMarkers();
@@ -10,6 +18,7 @@ class MapsContainer extends Component {
 
   render() {
     const markersToRender = [];
+
     this.props.markers.map((marker, key) => {
       let newMarker = {
         position: {
@@ -22,8 +31,8 @@ class MapsContainer extends Component {
       markersToRender.push(newMarker);
     });
 
-    if (markersToRender.length < 1) {
-      return <div>Loading..</div>;
+    if (markersToRender.length < 1) { // should add if user did not search
+      return renderImage();
     }
 
     return (
