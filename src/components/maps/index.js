@@ -14,7 +14,8 @@ class MapsIndex extends Component {
   }
 
   render() {
-    const { markers, center } = this.props;
+    const { markers, location } = this.props;
+
     const renderMakers = markers.map(marker => {
       return (
         <Marker
@@ -35,7 +36,7 @@ class MapsIndex extends Component {
     return (
       <GoogleMap
         defaultZoom={14}
-        defaultCenter={center}>
+        defaultCenter={location}>
           {renderMakers}
       </GoogleMap>
     );

@@ -33,7 +33,7 @@ class MapsContainer extends Component {
             <div style={{ height: '100%' }} />
           }
           markers={markers}
-          center={location}
+          location={location}
         />
       </div>
     );
