@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {zoomMap} from '../../actions/maps';
 import Geosuggest from 'react-geosuggest';
 const inputSize = 280;
 
@@ -16,19 +18,16 @@ const styles = {
     fontWeight: "bold",
     fontSize: '1.2em'
   },
-  input: {
-    width: inputSize
-  },
   icon: {
-    border: "none",
-    top: "1.40rem"
+    border: "none"
   }
 }
 
 class MapsSearch extends Component {
-  onSuggestSelect(suggest) {
-    console.log(suggest);
+  onSuggestSelect = (suggest) => {
+    this.props.zoomMap(suggest.location);
   }
+
   render() {
     return (
       <div style={styles.locationSearch}>
@@ -44,7 +43,6 @@ class MapsSearch extends Component {
         <form>
           <div className="control has-icon has-icon-right">
             <Geosuggest
-              className="input is-medium"
               placeholder="Digite sua localização.."
               onSuggestSelect={this.onSuggestSelect}
               style={styles.input}
@@ -59,6 +57,6 @@ class MapsSearch extends Component {
   }
 }
 
-export default MapsSearch;
+export default connect(null, { zoomMap })(MapsSearch);
 
 

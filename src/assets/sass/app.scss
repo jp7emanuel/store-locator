@@ -1,2 +1,31 @@
 @import './variables';
 @import '../../../node_modules/bulma/bulma';
+
+.geosuggest {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.geosuggest__input {
+    height: 38px;
+    font-size: 1rem;
+    box-shadow: 'none' !important;
+
+    &:focus {
+        outline: none;
+        border: 1px solid #ccc !important;
+    }
+}
+
+.geosuggest__suggests {
+    border: 1px solid #ccc !important;
+
+    .geosuggest__suggests--hidden {
+        border: none !important;
+    }
+
+    .geosuggest__item {
+        color: $primary;
+        font-weight: bold;
+    }
+}

@@ -1,7 +1,9 @@
-import { FETCH_MARKERS } from '../actions/maps';
+import { FETCH_MARKERS, FETCH_ZOOM } from '../actions/maps';
 
 const INITIAL_STATE = {
-  markers: []
+  markers: [],
+  zoomAt: null,
+  located: false
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -10,7 +12,13 @@ export default function (state = INITIAL_STATE, action) {
       return {
         ...state,
         markers: action.payload
-      };
+      }
+    case FETCH_ZOOM:
+      return {
+        ...state,
+        zoomAt: action.payload,
+        located: true
+      }
     default:
       return state;
   }

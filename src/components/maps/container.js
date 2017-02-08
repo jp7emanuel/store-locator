@@ -17,6 +17,7 @@ class MapsContainer extends Component {
   }
 
   render() {
+    const { markers, located, zoomAt } = this.props;
     const markersToRender = [];
 
     this.props.markers.map((marker, key) => {
@@ -31,7 +32,7 @@ class MapsContainer extends Component {
       markersToRender.push(newMarker);
     });
 
-    if (markersToRender.length < 1) { // should add if user did not search
+    if (!zoomAt || !located || markersToRender.length < 1) {
       return renderImage();
     }
 
@@ -45,6 +46,7 @@ class MapsContainer extends Component {
             <div style={{ height: '100%' }} />
           }
           markers={markersToRender}
+          zoomAt={zoomAt}
         />
       </div>
     );
@@ -53,7 +55,9 @@ class MapsContainer extends Component {
 
 function mapsStateToProps(state) {
   return {
-    markers: state.maps.markers
+    markers: state.maps.markers,
+    zoomAt: state.maps.zoomAt,
+    located: state.maps.located
   }
 }
 
