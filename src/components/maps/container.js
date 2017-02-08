@@ -17,22 +17,9 @@ class MapsContainer extends Component {
   }
 
   render() {
-    const { markers, located, zoomAt } = this.props;
-    const markersToRender = [];
+    const { markers, location, fetching } = this.props;
 
-    this.props.markers.map((marker, key) => {
-      let newMarker = {
-        position: {
-          lat: marker.lat,
-          lng: marker.lng
-        },
-        key: 'Taiwan'+key,
-        defaultAnimation: 2
-      };
-      markersToRender.push(newMarker);
-    });
-
-    if (!zoomAt || !located || markersToRender.length < 1) {
+    if (fetching || !location || markers.length < 1) {
       return renderImage();
     }
 
@@ -45,8 +32,8 @@ class MapsContainer extends Component {
           mapElement={
             <div style={{ height: '100%' }} />
           }
-          markers={markersToRender}
-          zoomAt={zoomAt}
+          markers={markers}
+          center={location}
         />
       </div>
     );
@@ -56,8 +43,8 @@ class MapsContainer extends Component {
 function mapsStateToProps(state) {
   return {
     markers: state.maps.markers,
-    zoomAt: state.maps.zoomAt,
-    located: state.maps.located
+    location: state.maps.location,
+    fetching: state.maps.fetching
   }
 }
 

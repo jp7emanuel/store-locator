@@ -13,6 +13,10 @@ const storeSchema = new mongoose.Schema({
     ref: 'StoreType'
   },
   description: String,
+  showInfo: {
+    type: Boolean,
+    default: false
+  },
   location: {
     lat: Number,
     lng: Number

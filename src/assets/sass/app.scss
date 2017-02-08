@@ -9,11 +9,13 @@
 .geosuggest__input {
     height: 38px;
     font-size: 1rem;
-    box-shadow: 'none' !important;
+    box-shadow: none !important;
+    width: 92% !important;
 
     &:focus {
         outline: none;
-        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        border-color: transparent !important;
     }
 }
 
@@ -28,4 +30,22 @@
         color: $primary;
         font-weight: bold;
     }
+}
+
+.info-window-transition-enter {
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
+}
+
+.info-window-transition-enter.info-window-transition-enter-active {
+  opacity: 1;
+}
+
+.info-window-transition-leave {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.info-window-transition-leave.info-window-transition-leave-active {
+  opacity: 0.01;
 }

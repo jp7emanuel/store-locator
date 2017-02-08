@@ -63,7 +63,6 @@
     "mongoose": "^4.8.1",
     "nodemon": "^1.11.0",
     "react": "^15.4.2",
-    "react-addons-update": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-geosuggest": "^2.1.0",
     "react-google-maps": "beta",
@@ -71,7 +70,6 @@
     "react-router": "4.0.0-alpha.6",
     "redux": "^3.6.0",
     "redux-form": "^6.5.0",
-    "redux-promise-middleware": "^4.2.0",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
