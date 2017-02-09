@@ -16,7 +16,7 @@ class MapsIndex extends Component {
   }
 
   render() {
-    const { markers, location, openedMarkers } = this.props;
+    const { markers, location, openedMarker } = this.props;
 
     const renderMarkers = markers.map(marker => {
       return (
@@ -31,7 +31,7 @@ class MapsIndex extends Component {
     });
 
     const renderInfoWindows = markers.map(marker => {
-      if (!_.find(openedMarkers, itemId => itemId === marker._id)) { // marker id not found in openedMarkers array
+      if (openedMarker !== marker._id) {
         return false;
       }
       return (
@@ -63,9 +63,8 @@ class MapsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.maps);
   return {
-    openedMarkers: state.maps.openedMarkers
+    openedMarker: state.maps.openedMarker
   }
 }
 

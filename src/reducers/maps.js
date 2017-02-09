@@ -3,7 +3,7 @@ import { REQUEST_SEARCHING, FETCH_SEARCH, CLOSE_INFO_WINDOW, OPEN_INFO_WINDOW } 
 const INITIAL_STATE = {
   searching: false,
   location: null,
-  openedMarkers: []
+  openedMarker: null
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -22,13 +22,13 @@ export default function (state = INITIAL_STATE, action) {
     case CLOSE_INFO_WINDOW: {
       return {
         ...state,
-        openedMarkers: state.openedMarkers.filter(markerId => markerId !== action.payload)
+        openedMarker: null
       }
     }
     case OPEN_INFO_WINDOW: {
       return {
         ...state,
-        openedMarkers: state.openedMarkers.concat(action.payload._id),
+        openedMarker: action.payload._id,
         location: action.payload.location
       }
     }
