@@ -25,23 +25,25 @@ export function requestMarkers() {
   };
 }
 
-export function closeInfoWindow(markerId) {
+export function closeInfoWindow(marker) {
   return {
     type: CLOSE_INFO_WINDOW,
-    payload: markerId
+    payload: marker
   }
 }
 
-export function openInfoWindow(markerId) {
+export function openInfoWindow(marker) {
   return {
     type: OPEN_INFO_WINDOW,
-    payload: markerId
+    payload: marker
   }
 }
 
-export function search(location) {
+export function search(location, markers) {
+  let nearestMarker = findNearestMarker(location, markers);
+
   return dispatch => {
-    dispatch(fetchSearch(location));
+    dispatch(fetchSearch(nearestMarker.location));
   };
 }
 
@@ -76,4 +78,18 @@ export function requestSearching() {
   return {
     type: REQUEST_SEARCHING
   };
+}
+
+function findNearestMarker(location, markers) {
+  let mapsLocation = getGoogleMapsCoords(location);
+
+  markers.map(marker => {
+    return marker.distance = parseFloat((window.google.maps.geometry.spherical.computeDistanceBetween(mapsLocation, getGoogleMapsCoords(marker.location)) / 1000).toFixed(2));
+  });
+
+  return _(markers).sortBy('distance').value()[0];
+}
+
+function getGoogleMapsCoords(location) {
+  return new window.google.maps.LatLng(location.lat, location.lng);
 }

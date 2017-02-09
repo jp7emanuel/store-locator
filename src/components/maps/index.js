@@ -18,16 +18,12 @@ class MapsIndex extends Component {
     this.props.requestMarkers();
   }
 
-  handleMarkerClick = (markerId) => {
-    console.log(markerId);
+  handleMarkerClick = (marker) => {
+    this.props.openInfoWindow(marker);
   }
 
-  handleMarkerClick = (markerId) => {
-    this.props.openInfoWindow(markerId);
-  }
-
-  handleMarkerClose = (markerId) => {
-    this.props.closeInfoWindow(markerId);
+  handleMarkerClose = (marker) => {
+    this.props.closeInfoWindow(marker);
   }
 
   render() {
@@ -44,7 +40,7 @@ class MapsIndex extends Component {
           lat={marker.location.lat}
           lng={marker.location.lng}
           icon={'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'}
-          onClick={() => this.handleMarkerClick(marker._id)}
+          onClick={() => this.handleMarkerClick(marker)}
         />
       );
     });
@@ -59,7 +55,7 @@ class MapsIndex extends Component {
           lat={marker.location.lat + 0.0022}
           lng={marker.location.lng}
           content={ReactDOMServer.renderToString(<MapsInfoWindowContent marker={marker} />)}
-          onCloseClick={() => this.handleMarkerClose(marker._id)}
+          onCloseClick={() => this.handleMarkerClose(marker)}
         />
       );
     })

@@ -23,10 +23,4 @@ const storeSchema = new mongoose.Schema({
   }
 });
 
-storeSchema.path('name').required(true, 'O campo Nome é obrigatório.');
-storeSchema.path('address').required(true, 'O campo Endereço é obrigatório.');
-storeSchema.path('telephone').required(true, 'O Telefone nome é obrigatório.');
-storeSchema.path('type').required(true, 'O campo Tipo é obrigatório.');
-storeSchema.path('description').required(true, 'O campo Descrição é obrigatório.');
-
 export default mongoose.model('Store', storeSchema);

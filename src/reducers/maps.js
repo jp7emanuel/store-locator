@@ -55,7 +55,8 @@ export default function (state = INITIAL_STATE, action) {
 
       return {
         ...state,
-        markers: newMarkers
+        markers: newMarkers,
+        location: action.payload.location
       }
     }
     default:
@@ -63,9 +64,9 @@ export default function (state = INITIAL_STATE, action) {
   }
 }
 
-function updateMarkerShowInfo(markers, markerId, markerShowInfo = true) {
+function updateMarkerShowInfo(markers, marker, markerShowInfo = true) {
   return markers.map(item => {
-    if (item._id !== markerId) {
+    if (item._id !== marker._id) {
       return item;
     }
 

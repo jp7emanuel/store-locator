@@ -8,12 +8,10 @@ import OverlaySpinner from '../loadings/spinner';
 class MapsSearch extends Component {
   onSuggestSelect = (suggest) => {
     this.props.requestSearching();
-    this.props.search(suggest.location);
+    this.props.search(suggest.location, this.props.markers);
   }
 
   handleCLickMyLocation = (event) => {
-    event.preventDefault();
-
     this.props.requestSearching();
     navigator.geolocation.getCurrentPosition((position) => {
       let location = {
@@ -21,7 +19,7 @@ class MapsSearch extends Component {
         lng: position.coords.longitude
       }
 
-      this.props.search(location);
+      this.props.search(location, this.props.markers);
     });
   }
 
@@ -60,7 +58,8 @@ class MapsSearch extends Component {
 
 function mapStateToProps(state) {
   return {
-    searching: state.maps.searching
+    searching: state.maps.searching,
+    markers: state.maps.markers
   }
 }
 
