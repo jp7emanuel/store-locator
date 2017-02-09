@@ -7,12 +7,13 @@ const styles = {
     width: "100%",
     height: "100%",
     display: "table",
-    background: "rgba(0, 0, 0, 0.15)"
+    background: "rgba(0, 0, 0, 0.5)"
   },
   overlaySpinIcon: {
     display: "table-cell",
     verticalAlign: "middle",
-    textAlign: "center"
+    textAlign: "center",
+    color: 'white'
   }
 }
 
