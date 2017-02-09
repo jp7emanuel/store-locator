@@ -15,6 +15,12 @@ class MapsIndex extends Component {
     this.props.closeInfoWindow(markerId);
   }
 
+  onMapCreated(map) {
+    map.setOptions({
+      disableDefaultUI: true
+    });
+  }
+
   render() {
     const { markers, location, openedMarker } = this.props;
 
@@ -53,7 +59,8 @@ class MapsIndex extends Component {
           lat={location.lat}
           lng={window.innerWidth < 920 ? location.lng : (location.lng - 0.0125)}
           zoom={14}
-          params={{v: '3.exp', key: 'AIzaSyADN_LuQtGtfuQc08O5dvCFgNz_t3LpLKg', 'language': 'pt-BR', 'libraries': ['geometry', 'places']}}>
+          params={{v: '3.exp', key: 'AIzaSyADN_LuQtGtfuQc08O5dvCFgNz_t3LpLKg', 'language': 'pt-BR', 'libraries': ['geometry', 'places']}}
+          onMapCreated={this.onMapCreated}>
             {renderMarkers}
             {renderInfoWindows}
         </Gmaps>
