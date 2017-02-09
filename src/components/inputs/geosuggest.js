@@ -6,7 +6,7 @@ const renderInputGeosuggest = ({ input, label, onSuggestSelect, meta: { touched,
   <div className="control" key={input.name}>
     <label className="label">{label ? label : _.capitalize(input.name)}</label>
     <div>
-      <Geosuggest {...input} onSuggestSelect={onSuggestSelect} />
+      <Geosuggest {...input} onSuggestSelect={onSuggestSelect} placeholder="Digite um endereço ou local..." />
       {touched && error && <span className="help is-danger">{error}</span>}
     </div>
   </div>
