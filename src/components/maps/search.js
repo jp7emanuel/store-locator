@@ -59,8 +59,7 @@ class MapsSearch extends Component {
 
 function mapStateToProps(state) {
   return {
-    searching: state.maps.searching,
-    markers: state.maps.markers
+    searching: state.maps.searching
   }
 }
 

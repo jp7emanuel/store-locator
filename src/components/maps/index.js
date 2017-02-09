@@ -1,37 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { requestMarkers, openInfoWindow, closeInfoWindow } from '../../actions/maps';
+import { openInfoWindow, closeInfoWindow } from '../../actions/maps';
 import MapsInfoWindowContent from './info-window-content';
 import {Gmaps, Marker, InfoWindow} from 'react-gmaps';
 import ReactDOMServer from 'react-dom/server';
-
-function renderImage() {
-  return (
-    <figure className="image is-2by1">
-      <img alt="Background" src="/img/background.jpg" />
-    </figure>
-  );
-}
+import _ from 'lodash';
 
 class MapsIndex extends Component {
-  componentWillMount() {
-    this.props.requestMarkers();
-  }
-
   handleMarkerClick = (marker) => {
     this.props.openInfoWindow(marker);
   }
 
-  handleMarkerClose = (marker) => {
-    this.props.closeInfoWindow(marker);
+  handleMarkerClose = (markerId) => {
+    this.props.closeInfoWindow(markerId);
   }
 
   render() {
-    const { markers, location, fetching } = this.props;
-
-    if (fetching || !location || markers.length < 1) {
-      return renderImage();
-    }
+    const { markers, location, openedMarkers } = this.props;
 
     const renderMarkers = markers.map(marker => {
       return (
@@ -46,7 +31,7 @@ class MapsIndex extends Component {
     });
 
     const renderInfoWindows = markers.map(marker => {
-      if (!marker.showInfo) {
+      if (!_.find(openedMarkers, itemId => itemId === marker._id)) { // marker id not found in openedMarkers array
         return false;
       }
       return (
@@ -55,7 +40,7 @@ class MapsIndex extends Component {
           lat={marker.location.lat + 0.0022}
           lng={marker.location.lng}
           content={ReactDOMServer.renderToString(<MapsInfoWindowContent marker={marker} />)}
-          onCloseClick={() => this.handleMarkerClose(marker)}
+          onCloseClick={() => this.handleMarkerClose(marker._id)}
         />
       );
     })
@@ -77,12 +62,12 @@ class MapsIndex extends Component {
   }
 }
 
-function mapsStateToProps(state) {
+function mapStateToProps(state) {
+  console.log(state.maps);
   return {
-    markers: state.maps.markers,
-    location: state.maps.location,
-    fetching: state.maps.fetching
+    openedMarkers: state.maps.openedMarkers
   }
 }
 
-export default connect(mapsStateToProps, { requestMarkers, openInfoWindow, closeInfoWindow })(MapsIndex);
+
+export default connect(mapStateToProps, { openInfoWindow, closeInfoWindow })(MapsIndex);

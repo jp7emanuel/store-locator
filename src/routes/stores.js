@@ -73,12 +73,8 @@ router.delete('/stores/:id', (req, res, next) => {
     if (err) {
       return res.status(500).send(err);
     }
-    // store.title = req.body.title || store.title;
-    // store.description = req.body.description || store.description;
-    // store.price = req.body.price || store.price;
-    // store.completed = req.body.completed || store.completed;
 
-    res.status(204).send(store);
+    return res.status(204).send(store);
   });
 });
 

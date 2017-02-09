@@ -1,41 +1,18 @@
-import { REQUEST_REJECTED, REQUEST_LOADING, FETCH_MARKERS, FETCH_SEARCH, CLOSE_INFO_WINDOW, OPEN_INFO_WINDOW, REQUEST_SEARCHING } from '../actions/maps';
+import { REQUEST_SEARCHING, FETCH_SEARCH, CLOSE_INFO_WINDOW, OPEN_INFO_WINDOW } from '../actions/maps';
 
 const INITIAL_STATE = {
-  markers: [],
   searching: false,
   location: null,
-  fetching: false,
-  fetched: false,
-  error: null,
+  openedMarkers: []
 };
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
-    case REQUEST_LOADING:
-      return {
-        ...state,
-        fetching: true,
-        fetched: false
-      };
     case REQUEST_SEARCHING:
       return {
         ...state,
         searching: true
       };
-    case REQUEST_REJECTED:
-      return {
-        ...state,
-        fetching: false,
-        fetched: false,
-        error: action.payload.data
-      };
-    case FETCH_MARKERS:
-      return {
-        ...state,
-        markers: action.payload,
-        fetching: false,
-        fetched: true
-      }
     case FETCH_SEARCH:
       return {
         ...state,
@@ -43,36 +20,19 @@ export default function (state = INITIAL_STATE, action) {
         searching: false
       }
     case CLOSE_INFO_WINDOW: {
-      let newMarkers = updateMarkerShowInfo(state.markers, action.payload, false);
-
       return {
         ...state,
-        markers: newMarkers
+        openedMarkers: state.openedMarkers.filter(markerId => markerId !== action.payload)
       }
     }
     case OPEN_INFO_WINDOW: {
-      let newMarkers = updateMarkerShowInfo(state.markers, action.payload);
-
       return {
         ...state,
-        markers: newMarkers,
+        openedMarkers: state.openedMarkers.concat(action.payload._id),
         location: action.payload.location
       }
     }
     default:
       return state;
   }
-}
-
-function updateMarkerShowInfo(markers, marker, markerShowInfo = true) {
-  return markers.map(item => {
-    if (item._id !== marker._id) {
-      return item;
-    }
-
-    return {
-      ...item,
-      showInfo: markerShowInfo
-    };
-  });
 }
