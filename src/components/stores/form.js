@@ -34,6 +34,7 @@ class StoresForm extends Component {
 
   render () {
     const { types, handleSubmit, submitting } = this.props;
+
     const storeTypesOptions = types.map(type => {
       return {
         value: type._id,
@@ -50,10 +51,9 @@ class StoresForm extends Component {
         <Field name="location" component={renderInputGeosuggest} type="text" label="Localização:" onSuggestSelect={this.onSuggestSelect}/>
         <Field name="telephone" component={renderInputText} type="text" label="Telefone:" />
         <Field name="type" component={renderInputSelect} options={storeTypesOptions} label="Tipo:" />
-
         <Field name="description" component={renderInputText} type="text" label="Descrição:" />
 
-        <button className="button is-primary" type="submit" disabled={submitting}>Submit</button>
+        <button className="button is-primary" type="submit" disabled={submitting}>Enviar</button>
       </form>
     );
   }

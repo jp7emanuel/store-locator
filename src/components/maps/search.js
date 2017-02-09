@@ -42,7 +42,7 @@ class MapsSearch extends Component {
         <form>
           <div className="control has-icon has-icon-right" style={styles.geosuggest}>
             <Geosuggest
-              placeholder="Digite sua localização.."
+              placeholder="Digite um endereço..."
               onSuggestSelect={this.onSuggestSelect}
               className="search"
               style={styles.input}
