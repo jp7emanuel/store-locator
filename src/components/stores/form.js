@@ -4,11 +4,12 @@ import { Field, reduxForm } from 'redux-form';
 import _ from 'lodash';
 import renderInputText from '../inputs/text';
 import renderInputSelect from '../inputs/select';
+import renderInputGeosuggest from '../inputs/geosuggest';
 import { requestStoreTypes } from '../../actions/store-types';
 
 const validate = values => {
   const errors = {}
-  const requiredFields = ['name', 'address', 'telephone', 'type', 'description', 'lat', 'lng'];
+  const requiredFields = ['name', 'location', 'telephone', 'type', 'description'];
 
   _.each(requiredFields, field => {
     if (!values[field]) {
@@ -25,6 +26,12 @@ class StoresForm extends Component {
     this.props.requestStoreTypes();
   }
 
+  onSuggestSelect = (suggest) => {
+    this.props.change('lat', suggest.location.lat);
+    this.props.change('lng', suggest.location.lng);
+    this.props.change('address', suggest.gmaps.formatted_address);
+  }
+
   render () {
     const { types, handleSubmit, submitting } = this.props;
     const storeTypesOptions = types.map(type => {
@@ -35,15 +42,14 @@ class StoresForm extends Component {
     });
     return (
       <form className="is-horizontal" onSubmit={handleSubmit}>
-        <Field name="name" component={renderInputText} type="text" label="Nome da Loja:" />
-        <Field name="address" component={renderInputText} type="text" label="Endereço:" />
-        <Field name="telephone" component={renderInputText} type="text" label="Telefone:" />
+        <Field name="lat" component="input" type="hidden"/>
+        <Field name="lng" component="input" type="hidden"/>
+        <Field name="address" component="input" type="hidden"/>
 
-        <div className="control is-grouped">
-          <Field name="type" component={renderInputSelect} options={storeTypesOptions} label="Tipo:" />
-          <Field name="lat" component={renderInputText} type="text" expanded label="Latitude:" />
-          <Field name="lng" component={renderInputText} type="text" expanded label="Longitude:" />
-        </div>
+        <Field name="name" component={renderInputText} type="text" label="Nome da Loja:" />
+        <Field name="location" component={renderInputGeosuggest} type="text" label="Localização:" onSuggestSelect={this.onSuggestSelect}/>
+        <Field name="telephone" component={renderInputText} type="text" label="Telefone:" />
+        <Field name="type" component={renderInputSelect} options={storeTypesOptions} label="Tipo:" />
 
         <Field name="description" component={renderInputText} type="text" label="Descrição:" />
 

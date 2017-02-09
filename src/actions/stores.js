@@ -15,11 +15,10 @@ export function saveStore(store) {
   }
   let persistedStore = _.omit(store, ['lat', 'lng']);
   persistedStore.location = location;
-
   return function(dispatch) {
     return axios.post(`${API_URL}/stores`, { data: persistedStore })
     .then(function(response) {
-      dispatch(saveStore(response));
+      dispatch(createStore(response));
     })
     .catch(function(error){
       dispatch(requestRejected(error));

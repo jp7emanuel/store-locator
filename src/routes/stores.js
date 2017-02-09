@@ -22,7 +22,6 @@ router.post('/stores', (req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
   let store = new Store(req.body.data);
-
   store.save()
     .then( data => {
       res.status(200).json(data);

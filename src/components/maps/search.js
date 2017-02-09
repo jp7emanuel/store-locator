@@ -44,6 +44,7 @@ class MapsSearch extends Component {
             <Geosuggest
               placeholder="Digite sua localização.."
               onSuggestSelect={this.onSuggestSelect}
+              className="search"
               style={styles.input}
             />
             <span className="icon" style={styles.icon}>

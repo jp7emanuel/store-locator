@@ -2,50 +2,55 @@
 @import '../../../node_modules/bulma/bulma';
 
 .geosuggest {
-    width: 100% !important;
-    margin: 0 !important;
-}
+  width: 100% !important;
+  margin: 0 !important;
 
-.geosuggest__input {
-    height: 38px;
-    font-size: 1rem;
-    box-shadow: none !important;
-    width: 92% !important;
+  .geosuggest__input {
+    @extend .input;
 
     &:focus {
+      outline: none;
+    }
+  }
+
+  .geosuggest__suggests {
+      border: 1px solid $primary;
+      border-top-width: 0;
+  }
+
+  .geosuggest__suggests--hidden {
+    border: none !important;
+  }
+
+
+  &.search {
+    .geosuggest__input {
+      height: 38px;
+      font-size: 1rem;
+      box-shadow: none !important;
+      width: 100% !important;
+      border-right: none !important;
+
+      &:focus {
         outline: none;
         box-shadow: none !important;
         border-color: transparent !important;
-    }
-}
-
-.geosuggest__suggests {
-    border: 1px solid #ccc !important;
-
-    .geosuggest__suggests--hidden {
-        border: none !important;
+      }
     }
 
-    .geosuggest__item {
+    .geosuggest__suggests {
+      border: 1px solid #ccc !important;
+
+      .geosuggest__item {
         color: $primary;
         font-weight: bold;
+      }
     }
+  }
 }
 
-.info-window-transition-enter {
-  opacity: 0.01;
-  transition: opacity 1s ease-in;
-}
-
-.info-window-transition-enter.info-window-transition-enter-active {
-  opacity: 1;
-}
-
-.info-window-transition-leave {
-  opacity: 1;
-  transition: opacity 1s ease-in;
-}
-
-.info-window-transition-leave.info-window-transition-leave-active {
-  opacity: 0.01;
+@media (max-width: 920px) {
+  .geosuggest.search .geosuggest__input{
+    width: 100% !important;
+  }
 }
