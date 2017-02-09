@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MapsContainer from '../maps/container';
+import MapsIndex from '../maps';
 import MapsSearch from '../maps/search';
 
 class StoresIndex extends Component {
@@ -7,7 +7,7 @@ class StoresIndex extends Component {
     return (
       <div className="container">
         <MapsSearch />
-        <MapsContainer />
+        <MapsIndex />
       </div>
     );
   }

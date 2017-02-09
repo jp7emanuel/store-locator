@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {search, requestSearching} from '../../actions/maps';
 import Geosuggest from 'react-geosuggest';
 import {styles} from './styles';
+import OverlaySpinner from '../loadings/spinner';
 
 class MapsSearch extends Component {
   onSuggestSelect = (suggest) => {
@@ -29,19 +30,14 @@ class MapsSearch extends Component {
 
     return (
       <div style={styles.locationSearch}>
+        { searching && (<OverlaySpinner />) }
+
         <div style={styles.addSize}>
-          <button className="button" style={styles.button} onClick={ (event) => this.handleCLickMyLocation(event) } disabled={searching}>
+          <button className="button" style={styles.button} onClick={ (event) => this.handleCLickMyLocation(event) }>
             <span className="icon is-medium">
               <i className="fa fa-location-arrow"></i>
             </span>
             <span>Usar Minha Localização</span>
-            {
-              searching && (
-                <span className="icon is-medium">
-                  <i className="fa fa-spinner fa-spin"></i>
-                </span>
-              )
-            }
           </button>
         </div>
 

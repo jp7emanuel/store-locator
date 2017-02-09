@@ -3,11 +3,13 @@ const contentSize = 280;
 const locationSearchStyle = () => {
   if (window.innerWidth < 920)
     return {
-      position: "relative"
+      position: "relative",
+      height: 77
     }
 
     return {
       position: "absolute",
+      height: 77,
       zIndex: 9999,
       top: 40,
       left: 40
@@ -33,5 +35,8 @@ export const styles = {
   geosuggest: {
     backgroundColor: 'white',
     border: 0
+  },
+  infoWindow: {
+    width: 230
   }
 }
