@@ -16,7 +16,8 @@ export default function (state = INITIAL_STATE, action) {
     case FETCH_SEARCH:
       return {
         ...state,
-        location: action.payload,
+        openedMarker: action.payload._id,
+        location: action.payload.location,
         searching: false
       }
     case CLOSE_INFO_WINDOW: {

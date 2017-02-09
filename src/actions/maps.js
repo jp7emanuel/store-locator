@@ -23,7 +23,7 @@ export function search(location, markers) {
   let nearestMarker = findNearestMarker(location, markers);
 
   return dispatch => {
-    dispatch(fetchSearch(nearestMarker.location));
+    dispatch(fetchSearch(nearestMarker));
   };
 }
 
