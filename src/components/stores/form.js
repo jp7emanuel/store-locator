@@ -73,7 +73,7 @@ class StoresForm extends Component {
         <Field name="description" component={renderInputText} type="text" label="Descrição:" />
 
         <button className="button is-primary" type="submit" disabled={submitting}>Enviar</button>
-        <button type="button" disabled={pristine || submitting} onClick={this.formReset}>Reiniciar</button>
+        <button className="button is-link" type="button" disabled={pristine || submitting} onClick={this.formReset}>Reiniciar</button>
       </form>
     );
   }
