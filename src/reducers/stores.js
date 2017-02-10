@@ -1,4 +1,4 @@
-import { REQUEST_REJECTED, REQUEST_LOADING, CREATE_STORE, FETCH_STORES } from '../actions/stores';
+import { REQUEST_REJECTED, REQUEST_LOADING, CREATE_STORE, FETCH_STORES, FETCH_STORE, UPDATE_STORE, REMOVE_STORE } from '../actions/stores';
 
 const INITIAL_STATE = {
   all: [],
@@ -30,11 +30,24 @@ export default function (state = INITIAL_STATE, action) {
         fetching: false,
         fetched: true
       }
+    case FETCH_STORE:
+      return {
+        ...state,
+        store: action.payload,
+        fetching: false,
+        fetched: true
+      }
+    case UPDATE_STORE:
     case CREATE_STORE:
       return {
         ...state,
         store: action.payload.data
       };
+    case REMOVE_STORE:
+      return {
+        ...state,
+        all: state.all.filter(store => store._id !== action.payload)
+      }
     default:
       return state;
   }

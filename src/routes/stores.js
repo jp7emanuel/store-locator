@@ -13,8 +13,21 @@ router.get('/stores', (req, res, next) => {
 
   Store.find()
     .then(doc => {
-      res.status(201).json(doc);
+      res.status(200).json(doc);
     });
+});
+
+router.get('/stores/:id', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+
+  Store.findOne({ _id: req.params.id }, (err, store) => {
+    if (err) {
+      return next(error);
+    }
+
+    return res.status(201).send(store);
+  });
 });
 
 router.post('/stores', (req, res, next) => {
@@ -24,44 +37,31 @@ router.post('/stores', (req, res, next) => {
   let store = new Store(req.body.data);
   store.save()
     .then( data => {
-      res.status(200).json(data);
+      res.status(202).json(data);
     })
     .catch(e => next(e));
-});
-
-router.get('/stores/:id', (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-
-  Store.find({ id_slug: req.id_slug }, (err, store) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-
-    return res.status(201).send(store);
-  });
 });
 
 router.put('/stores/:id', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 
-  Store.findOne({ id_slug: req.id_slug }, (err, store) => {
-    if (err) {
-      return res.status(500).send(err);
+  let id = req.params.id;
+  let body = req.body.data;
+
+  Store.findByIdAndUpdate(id, body, function(error, store) {
+    if (error) {
+      return next(error);
     }
-    // store.title = req.body.title || store.title;
-    // store.description = req.body.description || store.description;
-    // store.price = req.body.price || store.price;
-    // store.completed = req.body.completed || store.completed;
 
-    store.save((err, store) => {
-      if (err) {
-        return res.status(500).send(err);
-      }
+    // Render not found error
+    if (!store) {
+      return res.status(404).json({
+        message: 'Store with id ' + id + ' can not be found.'
+      });
+    }
 
-      return res.status(201).send(store);
-    });
+    return res.status(203).json(store);
   });
 });
 
@@ -69,12 +69,19 @@ router.delete('/stores/:id', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 
-  Store.findOneAndRemove({ id_slug: req.id_slug }, (err, store) => {
-    if (err) {
-      return res.status(500).send(err);
+  Store.findByIdAndRemove(req.params.id, function(error, store) {
+    if (error) {
+      return next(error);
     }
 
-    return res.status(204).send(store);
+    // Render not found error
+    if (!store) {
+      return res.status(404).json({
+        message: 'Store with id ' + id + ' can not be found.'
+      });
+    }
+
+    return res.status(204).json(store);
   });
 });
 

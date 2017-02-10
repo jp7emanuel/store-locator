@@ -6,6 +6,7 @@ const storeSchema = new mongoose.Schema({
     index: true
   },
   address: String,
+  place: String,
   telephone: String,
   image: String,
   type: {

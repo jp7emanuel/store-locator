@@ -14,7 +14,10 @@ class App extends Component {
               </Link>
             </div>
             <div className="nav-right nav-menu">
-              <Link to="/create" className="nav-item">
+              <Link to="/stores" className="nav-item">
+                Gerenciar Lojas
+              </Link>
+              <Link to="/stores/create" className="nav-item">
                 Cadastrar Lojas
               </Link>
             </div>

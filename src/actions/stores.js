@@ -8,7 +8,9 @@ export const REQUEST_REJECTED = 'REQUEST_REJECTED';
 export const FETCH_STORES = 'FETCH_STORES';
 export const CREATE_STORE = 'CREATE_STORE';
 export const FETCH_SEARCH_STORE = 'FETCH_SEARCH_STORE';
-export const DELETE_STORE = 'DELETE_STORE';
+export const REMOVE_STORE = 'REMOVE_STORE';
+export const FETCH_STORE = 'FETCH_STORE';
+export const UPDATE_STORE = 'UPDATE_STORE';
 
 export function requestStores() {
   return dispatch => {
@@ -24,15 +26,23 @@ export function requestStores() {
   };
 }
 
+export function requestStore(storeId) {
+  return dispatch => {
+    dispatch(requestLoading());
+
+    return axios.get(`${API_URL}/stores/${storeId}`)
+    .then(function(response) {
+      dispatch(fetchStore(response.data));
+    })
+    .catch(function(error){
+      dispatch(requestRejected(error));
+    });
+  };
+}
+
 export function saveStore(store) {
-  let location = {
-      lat: store.lat,
-      lng: store.lng
-  }
-  let persistedStore = _.omit(store, ['lat', 'lng']);
-  persistedStore.location = location;
   return function(dispatch) {
-    return axios.post(`${API_URL}/stores`, { data: persistedStore })
+    return axios.post(`${API_URL}/stores`, { data: store })
     .then(function(response) {
       dispatch(createStore(response));
     })
@@ -42,11 +52,24 @@ export function saveStore(store) {
   };
 }
 
-export function removeStore(storeId) {
+export function editStore(store) {
   return function(dispatch) {
-    return axios.delete(`${API_URL}/stores/${storeId}`)
+    return axios.put(`${API_URL}/stores/${store._id}`, { data: store })
     .then(function(response) {
-      dispatch(deleteStore(response));
+      dispatch(updateStore(response));
+    })
+    .catch(function(error){
+      dispatch(requestRejected(error));
+    })
+  };
+}
+
+
+export function deleteStore(id) {
+  return function(dispatch) {
+    return axios.delete(`${API_URL}/stores/${id}`)
+    .then(function(response) {
+      dispatch(removeStore(id));
     })
     .catch(function(error){
       dispatch(requestRejected(error));
@@ -74,6 +97,13 @@ export function fetchStores(response) {
   };
 }
 
+export function fetchStore(response) {
+  return {
+    type: FETCH_STORE,
+    payload: response
+  };
+}
+
 export function createStore(response) {
   return {
     type: CREATE_STORE,
@@ -81,8 +111,16 @@ export function createStore(response) {
   }
 }
 
-export function deleteStore(response) {
+export function updateStore(response) {
   return {
-    type: DELETE_STORE
+    type: UPDATE_STORE,
+    payload: response
+  }
+}
+
+export function removeStore(id) {
+  return {
+    type: REMOVE_STORE,
+    payload: id
   }
 }
