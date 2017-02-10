@@ -3,19 +3,33 @@ import { connect } from 'react-redux';
 import StoresForm from './form';
 import { saveStore } from '../../actions/stores';
 import ReduxSweetAlert, { showAlert, dismissAlert } from 'react-redux-sweetalert';
+import Redirect from 'react-router/Redirect';
 
 class StoresCreate extends Component {
+  state = { saved: false };
+
   handleSubmit = (values) => {
     this.props.saveStore(values);
     this.props.showAlert({
       title: '',
       text: 'Loja Cadastrada com sucesso!',
       type: "success",
-      onConfirm: this.props.dismissAlert,
+      onConfirm: this.handleDismiss,
+      onClose: this.handleDismiss,
+      onOutsideClick: this.handleDismiss
     });
   }
 
+  handleDismiss = () => {
+    this.props.dismissAlert();
+    this.setState({ saved: true });
+  }
+
   render() {
+    if (this.state.saved) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <section className="section">
         <div className="container">

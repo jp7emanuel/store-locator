@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import { requestStore, editStore } from '../../actions/stores';
 import StoresForm from './form';
 import ReduxSweetAlert, { showAlert, dismissAlert } from 'react-redux-sweetalert';
+import Redirect from 'react-router/Redirect';
 
 class StoresEdit extends Component {
+
+  state = { saved: false };
+
   componentWillMount() {
     this.props.requestStore(this.props.params.id);
   }
@@ -15,11 +19,22 @@ class StoresEdit extends Component {
       title: '',
       text: 'Loja Editada com sucesso!',
       type: "success",
-      onConfirm: this.props.dismissAlert,
+      onConfirm: this.handleDismiss,
+      onClose: this.handleDismiss,
+      onOutsideClick: this.handleDismiss
     });
   }
 
+  handleDismiss = () => {
+    this.props.dismissAlert();
+    this.setState({ saved: true });
+  }
+
   render() {
+    if (this.state.saved) {
+      return <Redirect to="/" />;
+    }
+
     const { store, fetching } = this.props;
 
     if (!store || fetching ) {
