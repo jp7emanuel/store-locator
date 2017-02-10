@@ -18,9 +18,9 @@ class StoresIndex extends Component {
   }
 
   render() {
-    const { stores, fetching, location } = this.props;
+    const { stores, fetching, location, searchedLocation } = this.props;
 
-    if (fetching || !location) {
+    if (fetching || !location || !searchedLocation) {
       return (
         <div className="container">
           <MapsSearch markers={stores} />
@@ -32,7 +32,7 @@ class StoresIndex extends Component {
     return (
       <div className="container">
         <MapsSearch markers={stores} />
-        <MapsIndex markers={stores} location={location} />
+        <MapsIndex markers={stores} location={location} searchedLocation={searchedLocation} />
       </div>
     );
   }
@@ -42,7 +42,8 @@ function mapsStateToProps(state) {
   return {
     stores: state.stores.all,
     fetching: state.stores.fetching,
-    location: state.maps.location
+    location: state.maps.location,
+    searchedLocation: state.maps.searchedLocation
   }
 }
 

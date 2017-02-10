@@ -22,7 +22,7 @@ class MapsIndex extends Component {
   }
 
   render() {
-    const { markers, location, openedMarker } = this.props;
+    const { markers, location, openedMarker, searchedLocation } = this.props;
 
     const renderMarkers = markers.map(marker => {
       return (
@@ -45,7 +45,7 @@ class MapsIndex extends Component {
           key={marker._id}
           lat={marker.location.lat + 0.0022}
           lng={marker.location.lng}
-          content={ReactDOMServer.renderToString(<MapsInfoWindowContent marker={marker} />)}
+          content={ReactDOMServer.renderToString(<MapsInfoWindowContent marker={marker} searchedLocation={searchedLocation} />)}
           onCloseClick={() => this.handleMarkerClose(marker._id)}
         />
       );

@@ -21,9 +21,12 @@ export function openInfoWindow(marker) {
 
 export function search(location, markers) {
   let nearestMarker = findNearestMarker(location, markers);
-
+  let locations = {
+    searchedLocation: location,
+    nearestMarker: nearestMarker
+  }
   return dispatch => {
-    dispatch(fetchSearch(nearestMarker));
+    dispatch(fetchSearch(locations));
   };
 }
 

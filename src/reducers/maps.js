@@ -3,6 +3,7 @@ import { REQUEST_SEARCHING, FETCH_SEARCH, CLOSE_INFO_WINDOW, OPEN_INFO_WINDOW } 
 const INITIAL_STATE = {
   searching: false,
   location: null,
+  searchedLocation: null,
   openedMarker: null
 };
 
@@ -16,8 +17,9 @@ export default function (state = INITIAL_STATE, action) {
     case FETCH_SEARCH:
       return {
         ...state,
-        openedMarker: action.payload._id,
-        location: action.payload.location,
+        openedMarker: action.payload.nearestMarker._id,
+        location: action.payload.nearestMarker.location,
+        searchedLocation: action.payload.searchedLocation,
         searching: false
       }
     case CLOSE_INFO_WINDOW: {
