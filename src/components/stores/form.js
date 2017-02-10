@@ -6,6 +6,7 @@ import renderInputText from '../inputs/text';
 import renderInputSelect from '../inputs/select';
 import renderInputGeosuggest from '../inputs/geosuggest';
 import { requestStoreTypes } from '../../actions/store-types';
+import Spinner from '../loadings/spinner';
 
 const validate = values => {
   const errors = {}
@@ -17,8 +18,8 @@ const validate = values => {
     }
   });
 
-  if (!values.place && (!values.location.lat || !values.location.lng || !values.address)) {
-    errors.place = 'Localização não encontrada ou não fornecida';
+  if (!values.address) {
+    errors.place = 'Você deve selecionar uma das opções do autopreenchimento';
   }
 
   return errors;
@@ -48,6 +49,10 @@ class StoresForm extends Component {
   render () {
     const { types, handleSubmit, submitting, initialValues, pristine } = this.props;
 
+    if (types.length < 1) {
+      return <Spinner />;
+    }
+
     const storeTypesOptions = types.map(type => {
       return {
         value: type._id,
@@ -57,8 +62,8 @@ class StoresForm extends Component {
 
     return (
       <form className="is-horizontal" onSubmit={handleSubmit}>
-        <Field name="location.lat" component="input" type="hidden" value={initialValues ? initialValues.location.lat : ""}/>
-        <Field name="location.lng" component="input" type="hidden" value={initialValues ? initialValues.location.lng : ""}/>
+        <Field name="location.lat" component="input" type="hidden" value={!initialValues ? "" : !initialValues.location ? "" : initialValues.location.lat}/>
+        <Field name="location.lng" component="input" type="hidden" value={!initialValues ? "" : !initialValues.location ? "" : initialValues.location.lng}/>
         <Field name="address" component="input" type="hidden"/>
 
         <Field name="name" component={renderInputText} type="text" label="Nome da Loja:" />
@@ -81,7 +86,8 @@ function mapStateToProps(state) {
 }
 
 StoresForm = reduxForm({
-  form: 'storesForm'
+  form: 'storesForm',
+  validate
 })(StoresForm)
 
 export default connect(mapStateToProps, { requestStoreTypes })(StoresForm)
