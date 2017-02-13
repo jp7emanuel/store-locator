@@ -27,7 +27,7 @@ class StoresCreate extends Component {
 
   render() {
     if (this.state.saved) {
-      return <Redirect to="/" />;
+      return <Redirect to="/stores" />;
     }
 
     return (
