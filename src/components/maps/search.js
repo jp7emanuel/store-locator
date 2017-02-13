@@ -4,11 +4,25 @@ import {search, requestSearching} from '../../actions/maps';
 import Geosuggest from 'react-geosuggest';
 import {styles} from './styles';
 import OverlaySpinner from '../loadings/spinner';
+import ReduxSweetAlert, { showAlert, dismissAlert } from 'react-redux-sweetalert';
 
 class MapsSearch extends Component {
   onSuggestSelect = (suggest) => {
-    this.props.requestSearching();
-    this.props.search(suggest.location, this.props.markers);
+    if (suggest.location) {
+      this.props.requestSearching();
+      this.props.search(suggest.location, this.props.markers);
+
+      return;
+    }
+
+    this.props.showAlert({
+      title: 'Erro!',
+      text: 'Localização não encontrada',
+      type: "error",
+      onConfirm: this.props.dismissAlert,
+      onClose: this.props.dismissAlert,
+      onOutsideClick: this.props.dismissAlert
+    });
   }
 
   handleCLickMyLocation = (event) => {
@@ -39,19 +53,19 @@ class MapsSearch extends Component {
           </button>
         </div>
 
-        <form>
-          <div className="control has-icon has-icon-right" style={styles.geosuggest}>
-            <Geosuggest
-              placeholder="Digite um endereço..."
-              onSuggestSelect={this.onSuggestSelect}
-              className="search"
-              style={styles.input}
-            />
-            <span className="icon" style={styles.icon}>
-              <i className="fa fa-search"></i>
-            </span>
-          </div>
-        </form>
+        <div className="control has-icon has-icon-right" style={styles.geosuggest}>
+          <Geosuggest
+            placeholder="Digite um endereço..."
+            onSuggestSelect={this.onSuggestSelect}
+            className="search"
+            style={styles.input}
+          />
+          <span className="icon" style={styles.icon}>
+            <i className="fa fa-search"></i>
+          </span>
+        </div>
+
+        <ReduxSweetAlert />
       </div>
     );
   }
@@ -63,6 +77,6 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { search, requestSearching })(MapsSearch);
+export default connect(mapStateToProps, { search, requestSearching, showAlert, dismissAlert })(MapsSearch);
 
 
