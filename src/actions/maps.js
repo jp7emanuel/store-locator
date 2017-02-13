@@ -24,8 +24,12 @@ export function search(location, markers) {
   let nearestMarker = findNearestMarker(location, markers);
   let locations = {
     searchedLocation: location,
-    nearestMarker: nearestMarker
+    nearestMarker: {
+      _id: nearestMarker ? nearestMarker._id : null,
+      location: nearestMarker ? nearestMarker.location : null
+    }
   }
+
   return dispatch => {
     dispatch(fetchSearch(locations));
   };
@@ -45,7 +49,7 @@ export function requestSearching() {
 }
 
 export function fetchNearestsMarkers(location, markers) {
-  let nearestsMarkers = findNearestsMarkers(location, markers, 50);
+  let nearestsMarkers = findNearestsMarkers(location, markers);
   return {
     type: FETCH_NEARESTSMARKERS,
     payload: nearestsMarkers

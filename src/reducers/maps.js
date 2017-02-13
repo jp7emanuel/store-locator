@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   location: null,
   searchedLocation: null,
   openedMarker: null,
-  nearestsMarkers: null
+  nearestsMarkers: []
 };
 
 export default function (state = INITIAL_STATE, action) {
