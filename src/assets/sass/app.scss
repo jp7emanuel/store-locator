@@ -54,3 +54,40 @@
     width: 100% !important;
   }
 }
+
+.stores-box {
+  position: absolute;
+  top: 120px;
+  left: 30px;
+  width: 280px;
+
+  .rows {
+    background: white;
+    height: 320px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px 10px;
+  }
+
+  .is-title {
+    background-color: $primary;
+    color: White;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 5px 20px;
+  }
+}
+
+@media (max-width: 920px) {
+  .stores-box {
+    position: relative;
+    top: 10px;
+    left: 0;
+    width: 100%;
+
+    .rows {
+      overflow: hidden;
+      height: auto;
+    }
+  }
+}

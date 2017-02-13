@@ -1,10 +1,11 @@
-import { REQUEST_SEARCHING, FETCH_SEARCH, CLOSE_INFO_WINDOW, OPEN_INFO_WINDOW } from '../actions/maps';
+import { REQUEST_SEARCHING, FETCH_SEARCH, CLOSE_INFO_WINDOW, OPEN_INFO_WINDOW, FETCH_NEARESTSMARKERS } from '../actions/maps';
 
 const INITIAL_STATE = {
   searching: false,
   location: null,
   searchedLocation: null,
-  openedMarker: null
+  openedMarker: null,
+  nearestsMarkers: null
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -33,6 +34,12 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         openedMarker: action.payload._id,
         location: action.payload.location
+      }
+    }
+    case FETCH_NEARESTSMARKERS: {
+      return {
+        ...state,
+        nearestsMarkers: action.payload
       }
     }
     default:

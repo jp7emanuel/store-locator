@@ -5,6 +5,7 @@ import MapsInfoWindowContent from './info-window-content';
 import {Gmaps, Marker, InfoWindow} from 'react-gmaps';
 import ReactDOMServer from 'react-dom/server';
 import _ from 'lodash';
+import MapsMarkerList from './marker-list';
 
 class MapsIndex extends Component {
   handleMarkerClick = (marker) => {
@@ -64,6 +65,8 @@ class MapsIndex extends Component {
             {renderMarkers}
             {renderInfoWindows}
         </Gmaps>
+
+        <MapsMarkerList markers={markers} searchedLocation={searchedLocation}  />
       </div>
     );
   }

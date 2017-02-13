@@ -1,9 +1,10 @@
-import _ from 'lodash';
+import { findNearestsMarkers, findNearestMarker } from '../services/maps';
 
 export const FETCH_SEARCH = 'FETCH_SEARCH';
 export const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW';
 export const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW';
 export const REQUEST_SEARCHING = 'REQUEST_SEARCHING';
+export const FETCH_NEARESTSMARKERS = 'FETCH_NEARESTSMARKERS';
 
 export function closeInfoWindow(markerId) {
   return {
@@ -43,16 +44,10 @@ export function requestSearching() {
   };
 }
 
-function findNearestMarker(location, markers) {
-  let mapsLocation = getGoogleMapsCoords(location);
-
-  markers.map(marker => {
-    return marker.distance = parseFloat((window.google.maps.geometry.spherical.computeDistanceBetween(mapsLocation, getGoogleMapsCoords(marker.location)) / 1000).toFixed(2));
-  });
-
-  return _(markers).sortBy('distance').value()[0];
-}
-
-function getGoogleMapsCoords(location) {
-  return new window.google.maps.LatLng(location.lat, location.lng);
+export function fetchNearestsMarkers(location, markers) {
+  let nearestsMarkers = findNearestsMarkers(location, markers, 50);
+  return {
+    type: FETCH_NEARESTSMARKERS,
+    payload: nearestsMarkers
+  }
 }

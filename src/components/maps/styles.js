@@ -1,19 +1,37 @@
 const contentSize = 280;
 
 const locationSearchStyle = () => {
-  if (window.innerWidth < 920)
+  if (window.innerWidth < 920) {
     return {
       position: "relative",
       height: 77
     }
+  }
 
+  return {
+    position: "absolute",
+    height: 77,
+    zIndex: 9999,
+    top: 20,
+    left: 30
+  }
+}
+
+const nearestsMarkersStyle = () => {
+  if (window.innerWidth < 920) {
     return {
-      position: "absolute",
-      height: 77,
-      zIndex: 9999,
-      top: 40,
-      left: 40
+      display: "flex",
+      flexDirection: "column"
     }
+  }
+
+  return {
+    position: "absolute",
+    height: 77,
+    zIndex: 9999,
+    top: 40,
+    left: 40
+  }
 }
 
 export const styles = {
@@ -38,5 +56,6 @@ export const styles = {
   },
   infoWindow: {
     width: 230
-  }
+  },
+  nearestsMarkers: nearestsMarkersStyle()
 }
