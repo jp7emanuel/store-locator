@@ -7,6 +7,7 @@ const renderInputGeosuggest = ({ input, label, onSuggestSelect, onSuggestNoResul
     <label className="label">{label ? label : _.capitalize(input.name)}</label>
     <div>
       <Geosuggest {...input}
+        className={ touched && error ? "is-danger" : "" }
         onSuggestSelect={onSuggestSelect}
         onSuggestNoResults={onSuggestNoResults}
         initialValue={input.value ? input.value : ""}

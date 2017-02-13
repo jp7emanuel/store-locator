@@ -12,7 +12,7 @@ class MapsSearch extends Component {
       this.props.requestSearching();
       this.props.search(suggest.location, this.props.markers);
 
-      return;
+      return true;
     }
 
     this.props.showAlert({

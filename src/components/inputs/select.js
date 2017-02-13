@@ -6,7 +6,8 @@ const renderInputSelect = ({ input, label, type, options, meta: { touched, error
     <label className="label">{label ? label : _.capitalize(input.name)}</label>
     <p>
       <span className="select">
-        <select {...input} defaultValue={options[0]._id}>
+        <select {...input} className={ touched && error ? "input is-danger" : "input" }>
+          <option value="">Selecione um Tipo</option>
           {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
         </select>
       </span>

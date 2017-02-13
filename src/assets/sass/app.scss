@@ -5,6 +5,12 @@
   width: 100% !important;
   margin: 0 !important;
 
+  &.is-danger {
+    input {
+      @extend .is-danger;
+    }
+  }
+
   .geosuggest__input {
     @extend .input;
 

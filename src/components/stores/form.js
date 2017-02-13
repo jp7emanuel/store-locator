@@ -19,7 +19,7 @@ const validate = values => {
   });
 
   if (!values.address) {
-    errors.place = 'Você deve selecionar uma das opções do autopreenchimento';
+    errors.place = 'Localização não encontrada para este endereço';
   }
 
   return errors;
@@ -32,8 +32,10 @@ class StoresForm extends Component {
   }
 
   onSuggestSelect = (suggest) => {
-    this.props.change('location', suggest.location);
-    this.props.change('address', suggest.gmaps.formatted_address);
+    if (suggest.location) {
+      this.props.change('location', suggest.location);
+      this.props.change('address', suggest.gmaps ? suggest.gmaps.formatted_address : suggest.label);
+    }
   }
 
   onSuggestNoResults = () => {
