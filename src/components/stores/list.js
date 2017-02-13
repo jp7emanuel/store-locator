@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import  { Link } from 'react-router';
+import Loading from '../loadings';
 import { requestStores, deleteStore } from '../../actions/stores';
 import ReduxSweetAlert, { showAlert, dismissAlert } from 'react-redux-sweetalert';
 
@@ -12,26 +13,41 @@ class StoresList extends Component {
   handleDelete = (event, store) => {
     event.preventDefault();
 
-    if(confirm(`Deseja remover a loja ${store.name} ?`)) {
+    let deleteStore = (store) => {
+      this.props.dismissAlert();
       this.props.deleteStore(store._id);
-      this.showSuccessAlert(store);
-    }
-  }
+    };
 
-  showSuccessAlert = (store) => {
-    this.props.showAlert({
+    let alertProps = {
       title: '',
-      text: `Loja ${store.name} removida com sucesso!`,
+      text: `Deseja remover a loja ${store.name}?`,
       type: "success",
-      onConfirm: this.props.dismissAlert
-    });
+      showConfirmButton: true,
+      showCancelButton: true,
+      onConfirm: () => deleteStore(store),
+      onCancel: this.props.dismissAlert(),
+      onOutsideClick: this.props.dismissAlert(),
+      onClose: this.props.dismissAlert()
+    };
+
+    this.props.showAlert(alertProps);
   }
 
   render() {
-    const { stores } = this.props;
+    const { stores, fetching } = this.props;
+
+    if (fetching) {
+      return <Loading />;
+    }
 
     if (stores.length < 1) {
-      return <div>Loading..</div>;
+      return (
+        <div className="container" style={{ marginTop: 40 }}>
+          <div className="notification is-primary">
+            Nenhuma loja cadastrada no momento. <Link to="/stores/create" style={{color: 'white', textDecoration: 'underline' }} className="is-link">Clique aqui para cadastrar uma loja </Link>
+          </div>
+        </div>
+      );
     }
 
     const renderList = stores.map((store, key) => {
@@ -87,7 +103,8 @@ class StoresList extends Component {
 
 function mapStateToProps(state) {
   return {
-    stores: state.stores.all
+    stores: state.stores.all,
+    fetching: state.stores.fetching
   }
 }
 
