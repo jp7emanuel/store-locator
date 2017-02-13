@@ -32,7 +32,7 @@ class StoresEdit extends Component {
 
   render() {
     if (this.state.saved) {
-      return <Redirect to="/" />;
+      return <Redirect to="/stores" />;
     }
 
     const { store, fetching } = this.props;
