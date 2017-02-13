@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {styles} from './styles';
 import MapsInfoWindowContent from './info-window-content';
 import { fetchNearestsMarkers } from '../../actions/maps';
 

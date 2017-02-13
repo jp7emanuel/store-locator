@@ -17,23 +17,6 @@ const locationSearchStyle = () => {
   }
 }
 
-const nearestsMarkersStyle = () => {
-  if (window.innerWidth < 920) {
-    return {
-      display: "flex",
-      flexDirection: "column"
-    }
-  }
-
-  return {
-    position: "absolute",
-    height: 77,
-    zIndex: 9999,
-    top: 40,
-    left: 40
-  }
-}
-
 export const styles = {
   locationSearch: locationSearchStyle(),
   button: {
@@ -56,6 +39,5 @@ export const styles = {
   },
   infoWindow: {
     width: 230
-  },
-  nearestsMarkers: nearestsMarkersStyle()
+  }
 }
