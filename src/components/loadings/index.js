@@ -5,3 +5,5 @@ class Loading extends Component {
     return <p className="container column">Loading...</p>;
   }
 }
+
+export default Loading;
