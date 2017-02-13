@@ -78,7 +78,8 @@
     "start": "gulp && node scripts/start.js",
     "build": "gulp --production && node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "server": "./node_modules/.bin/nodemon src/server.js --exec ./node_modules/.bin/babel-node --presets es2015,stage-0"
+    "server": "./node_modules/.bin/nodemon src/server.js --exec ./node_modules/.bin/babel-node --presets es2015,stage-0",
+    "heroku-postbuild": "gulp --production && node scripts/build.js"
   },
   "jest": {
     "collectCoverageFrom": [
