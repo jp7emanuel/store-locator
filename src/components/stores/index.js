@@ -21,7 +21,6 @@ class StoresIndex extends Component {
   render() {
     const { stores, fetching, location, searchedLocation } = this.props;
 
-
     if (fetching || !location || !searchedLocation) {
       return (
         <div className="container">

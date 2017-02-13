@@ -25,9 +25,9 @@ class StoresList extends Component {
       showConfirmButton: true,
       showCancelButton: true,
       onConfirm: () => deleteStore(store),
-      onCancel: this.props.dismissAlert(),
-      onOutsideClick: this.props.dismissAlert(),
-      onClose: this.props.dismissAlert()
+      onCancel: this.props.dismissAlert,
+      onOutsideClick: this.props.dismissAlert,
+      onClose: this.props.dismissAlert
     };
 
     this.props.showAlert(alertProps);
