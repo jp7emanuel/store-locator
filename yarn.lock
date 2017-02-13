@@ -6571,7 +6571,7 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
-sweetalert-react@^0.4.7, sweetalert-react@^0.4.8:
+sweetalert-react@^0.4.7:
   version "0.4.8"
   resolved "https://registry.yarnpkg.com/sweetalert-react/-/sweetalert-react-0.4.8.tgz#012e93396bee391d565fbc6afa2490d1034747de"
   dependencies:
