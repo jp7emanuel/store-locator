@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export function findNearestsMarkers(location, markers, maxDistance = null) {
+export function findNearestsMarkers(location, markers, maxDistanceInKm = null) {
   let mapsLocation = getGoogleMapsCoords(location);
 
   markers.map(marker => {
@@ -9,8 +9,8 @@ export function findNearestsMarkers(location, markers, maxDistance = null) {
 
   let cursorMarker = _(markers).sortBy('distance');
 
-  if (maxDistance) {
-    cursorMarker = cursorMarker.filter(marker => marker.distance <= maxDistance);
+  if (maxDistanceInKm) {
+    cursorMarker = cursorMarker.filter(marker => marker.distance <= maxDistanceInKm);
   }
 
   return cursorMarker.value();
