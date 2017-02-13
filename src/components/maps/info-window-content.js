@@ -3,10 +3,21 @@ import {styles} from './styles';
 
 class MapsInfoWindowContent extends Component {
   render() {
-    const { marker, searchedLocation } = this.props;
+    const { marker, searchedLocation, clickedMarker } = this.props;
     return (
       <div className="column" style={styles.infoWindow}>
-        <h2 className="title is-5" style={{marginBottom: 5}}>{marker.name}</h2>
+        {
+          clickedMarker ?
+          (
+            <a onClick={() => clickedMarker(marker)}>
+              <h2 className="title is-5" style={{marginBottom: 5}}>{marker.name}</h2>
+            </a>
+          )
+          :
+          (
+            <h2 className="title is-5" style={{marginBottom: 5}}>{marker.name}</h2>
+          )
+        }
 
         {
           marker.distance && (

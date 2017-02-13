@@ -67,7 +67,17 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding: 5px 10px;
+
+    .column {
+      width: 100%;
+
+      .title {
+        color: lighten($primary, 10%);
+        font-weight: 500;
+      }
+    }
   }
+
 
   .is-title {
     background-color: $primary;

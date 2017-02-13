@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MapsInfoWindowContent from './info-window-content';
-import { fetchNearestsMarkers } from '../../actions/maps';
+import { fetchNearestsMarkers, openInfoWindow } from '../../actions/maps';
 
 class MapsMarkerList extends Component {
   componentWillMount() {
     this.props.fetchNearestsMarkers(this.props.searchedLocation, this.props.markers);
+  }
+
+  handleMarkerClick = (marker) => {
+    this.props.openInfoWindow(marker);
   }
 
   render() {
@@ -18,7 +22,7 @@ class MapsMarkerList extends Component {
     const renderMakers = nearestsMarkers.map((marker, key) => {
       return (
         <div key={marker._id}>
-          <MapsInfoWindowContent marker={marker} searchedLocation={searchedLocation} />
+          <MapsInfoWindowContent marker={marker} searchedLocation={searchedLocation} clickedMarker={this.handleMarkerClick} />
           { key !== (nearestsMarkers.length-1) ? <hr/> : "" }
         </div>
       );
@@ -43,4 +47,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, {fetchNearestsMarkers})(MapsMarkerList);
+export default connect(mapStateToProps, { fetchNearestsMarkers, openInfoWindow })(MapsMarkerList);
