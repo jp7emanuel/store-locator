@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const FETCH_STORETYPES = 'FETCH_STORETYPES';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = '/api';
 
 export function requestStoreTypes() {
   return function(dispatch) {

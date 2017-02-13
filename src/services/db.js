@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/stores';
+const MONGO_URL = process.env.MONGODB_URI || 'mongodb://localhost/stores';
 
 mongoose.connect(MONGO_URL);
 

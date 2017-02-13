@@ -79,6 +79,7 @@
     "server": "./node_modules/.bin/nodemon src/server.js --exec ./node_modules/.bin/babel-node --presets es2015,stage-0",
     "heroku-postbuild": "gulp --production && node scripts/build.js"
   },
+  "proxy": "http://localhost:8080",
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"

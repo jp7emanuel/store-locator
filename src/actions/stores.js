@@ -1,7 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = '/api';
 
 export const REQUEST_LOADING = 'REQUEST_LOADING';
 export const REQUEST_REJECTED = 'REQUEST_REJECTED';
