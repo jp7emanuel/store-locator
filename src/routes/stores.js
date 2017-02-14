@@ -7,7 +7,7 @@ import cors from 'cors';
 let router = express.Router();
 router.all('*', cors());
 
-router.get('api/stores', (req, res, next) => {
+router.get('/api/stores', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 
@@ -17,7 +17,7 @@ router.get('api/stores', (req, res, next) => {
     });
 });
 
-router.get('api/stores/:id', (req, res, next) => {
+router.get('/api/stores/:id', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 
@@ -30,7 +30,7 @@ router.get('api/stores/:id', (req, res, next) => {
   });
 });
 
-router.post('api/stores', (req, res, next) => {
+router.post('/api/stores', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
@@ -42,7 +42,7 @@ router.post('api/stores', (req, res, next) => {
     .catch(e => next(e));
 });
 
-router.put('api/stores/:id', (req, res, next) => {
+router.put('/api/stores/:id', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 
@@ -65,7 +65,7 @@ router.put('api/stores/:id', (req, res, next) => {
   });
 });
 
-router.delete('api/stores/:id', (req, res, next) => {
+router.delete('/api/stores/:id', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 
