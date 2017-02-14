@@ -7,7 +7,6 @@ let router = express.Router();
 router.all('*', cors());
 
 router.get('/api/store-types', (req, res, next) => {
-  console.log('asdhasudhasudhasd');
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 

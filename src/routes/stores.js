@@ -38,9 +38,7 @@ router.post('/api/stores', (req, res, next) => {
     .then( data => {
       res.status(202).json(data);
     })
-    .catch(e => {
-      res.status(200).json(e);
-    });
+    .catch(e => next(e));
 });
 
 router.put('/api/stores/:id', (req, res, next) => {
