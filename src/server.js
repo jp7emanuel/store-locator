@@ -1,4 +1,4 @@
-import https from 'https';
+import http from 'http';
 import express from 'express';
 import path from 'path';
 import db from './services/db';
@@ -7,7 +7,7 @@ import storeTypesRoute from './routes/store-types';
 import bodyParser from 'body-parser';
 
 let app = express();
-app.server = https.createServer(app);
+app.server = http.createServer(app);
 
 app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, '../build')));

@@ -31,7 +31,7 @@ class MapsIndex extends Component {
           key={marker._id}
           lat={marker.location.lat}
           lng={marker.location.lng}
-          icon={'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'}
+          icon={'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'}
           onClick={() => this.handleMarkerClick(marker)}
         />
       );
