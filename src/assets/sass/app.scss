@@ -67,7 +67,7 @@
   left: 30px;
   width: 280px;
 
-  .rows {
+  .card-content {
     background: white;
     height: 320px;
     overflow-y: auto;
@@ -83,14 +83,12 @@
       }
     }
   }
-
-
-  .is-title {
+  .card-header {
     background-color: $primary;
-    color: White;
-    font-weight: bold;
-    font-size: 1.2em;
-    padding: 5px 20px;
+
+    h2, a {
+      color: white;
+    }
   }
 }
 

@@ -1,11 +1,23 @@
-import { REQUEST_SEARCHING, FETCH_SEARCH, CLOSE_INFO_WINDOW, OPEN_INFO_WINDOW, FETCH_NEARESTSMARKERS } from '../actions/maps';
+import {
+  REQUEST_SEARCHING,
+  FETCH_SEARCH,
+  CLOSE_INFO_WINDOW,
+  OPEN_INFO_WINDOW,
+  FETCH_NEARESTSMARKERS,
+  TOGGLE_FILTERS,
+  FILTER_DISTANCE
+} from '../actions/maps';
 
 const INITIAL_STATE = {
   searching: false,
   location: null,
   searchedLocation: null,
   openedMarker: null,
-  nearestsMarkers: []
+  nearestsMarkers: [],
+  filters: {
+    distance: 0
+  },
+  displayFilters: false
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -40,6 +52,22 @@ export default function (state = INITIAL_STATE, action) {
       return {
         ...state,
         nearestsMarkers: action.payload
+      }
+    }
+    case TOGGLE_FILTERS: {
+      return {
+        ...state,
+        displayFilters: !state.displayFilters
+      }
+    }
+    case FILTER_DISTANCE: {
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          distance: action.payload.selectedValue
+        },
+        nearestsMarkers: action.payload.nearestsMarkers
       }
     }
     default:

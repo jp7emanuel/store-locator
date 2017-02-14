@@ -5,6 +5,8 @@ export const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW';
 export const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW';
 export const REQUEST_SEARCHING = 'REQUEST_SEARCHING';
 export const FETCH_NEARESTSMARKERS = 'FETCH_NEARESTSMARKERS';
+export const TOGGLE_FILTERS = 'TOGGLE_FILTERS';
+export const FILTER_DISTANCE = 'FILTER_DISTANCE';
 
 export function closeInfoWindow(markerId) {
   return {
@@ -53,5 +55,21 @@ export function fetchNearestsMarkers(location, markers) {
   return {
     type: FETCH_NEARESTSMARKERS,
     payload: nearestsMarkers
+  }
+}
+
+export function toggleFilters() {
+  return {
+    type: TOGGLE_FILTERS
+  }
+}
+
+export function filterDistance(location, markers, value) {
+  return {
+    type: FILTER_DISTANCE,
+    payload: {
+      nearestsMarkers: findNearestsMarkers(location, markers, value),
+      selectedValue: value
+    }
   }
 }
