@@ -17,8 +17,9 @@ app.server.listen(process.env.PORT || 8080, function () {
 });
 
 app.use([storesRoute, storeTypesRoute]);
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
-// });
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+});
 
 export default app;
