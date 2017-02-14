@@ -25,6 +25,19 @@ const validate = values => {
   return errors;
 }
 
+const maskTelephone = (value) => {
+  if (!value) {
+    return value
+  }
+
+  let onlyNumbers = value.replace(/\D/g,"");
+  if (onlyNumbers.length > 11) {
+    onlyNumbers = onlyNumbers.slice(0, 11);
+  }
+
+  return onlyNumbers.replace(/^(\d{2})(\d)/g,"($1) $2").replace(/(\d)(\d{4})$/,"$1-$2");
+}
+
 class StoresForm extends Component {
 
   componentWillMount() {
@@ -70,7 +83,7 @@ class StoresForm extends Component {
 
         <Field name="name" component={renderInputText} type="text" label="Nome da Loja:" />
         <Field name="place" component={renderInputGeosuggest} type="text" label="Localização:" onSuggestSelect={this.onSuggestSelect} onSuggestNoResults={this.onSuggestNoResults}/>
-        <Field name="telephone" component={renderInputText} type="text" label="Telefone:" />
+        <Field name="telephone" component={renderInputText} type="text" label="Telefone:" normalize={maskTelephone} />
         <Field name="type" component={renderInputSelect} options={storeTypesOptions} label="Tipo:" />
         <Field name="description" component={renderInputText} type="text" label="Descrição:" />
 
