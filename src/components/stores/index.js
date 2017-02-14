@@ -21,14 +21,6 @@ class StoresIndex extends Component {
   render() {
     const { stores, fetching, location, searchedLocation } = this.props;
 
-    if (fetching || !location || !searchedLocation) {
-      return (
-        <div className="container">
-          <MapsSearch markers={stores} />
-          {renderImage()}
-        </div>
-      );
-    }
 
     if (stores.length < 1) {
       return (
@@ -40,6 +32,15 @@ class StoresIndex extends Component {
             <br/>
             <Link to="/stores/create" style={{color: 'white', textDecoration: 'underline' }} className="is-link">Clique aqui para cadastrar </Link>
           </div>
+        </div>
+      );
+    }
+
+    if (fetching || !location || !searchedLocation) {
+      return (
+        <div className="container">
+          <MapsSearch markers={stores} />
+          {renderImage()}
         </div>
       );
     }
