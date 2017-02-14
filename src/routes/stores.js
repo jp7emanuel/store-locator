@@ -1,7 +1,6 @@
 import express from 'express';
 import Store from '../models/store';
 import StoreType from '../models/store-types';
-import _ from 'lodash';
 import cors from 'cors';
 
 let router = express.Router();
@@ -39,7 +38,9 @@ router.post('/api/stores', (req, res, next) => {
     .then( data => {
       res.status(202).json(data);
     })
-    .catch(e => next(e));
+    .catch(e => {
+      res.status(200).json(e);
+    });
 });
 
 router.put('/api/stores/:id', (req, res, next) => {
