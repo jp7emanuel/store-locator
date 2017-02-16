@@ -6,7 +6,7 @@ import renderInputText from '../inputs/text';
 import renderInputSelect from '../inputs/select';
 import renderInputGeosuggest from '../inputs/geosuggest';
 import { requestStoreTypes } from '../../actions/store-types';
-import Spinner from '../loadings/spinner';
+import Loading from '../loadings';
 
 const validate = values => {
   const errors = {}
@@ -65,7 +65,7 @@ class StoresForm extends Component {
     const { types, handleSubmit, submitting, initialValues, pristine } = this.props;
 
     if (types.length < 1) {
-      return <Spinner />;
+      return <Loading />;
     }
 
     const storeTypesOptions = types.map(type => {
