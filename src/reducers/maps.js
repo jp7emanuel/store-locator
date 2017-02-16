@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   searching: false,
   location: null,
   searchedLocation: null,
+  searchedAddress: null,
   openedMarker: null,
   nearestsMarkers: [],
   filters: {
@@ -22,19 +23,22 @@ const INITIAL_STATE = {
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
-    case REQUEST_SEARCHING:
+    case REQUEST_SEARCHING: {
       return {
         ...state,
         searching: true
       };
-    case FETCH_SEARCH:
+    }
+    case FETCH_SEARCH: {
       return {
         ...state,
         openedMarker: action.payload.nearestMarker._id,
         location: action.payload.nearestMarker.location,
         searchedLocation: action.payload.searchedLocation,
+        searchedAddress: action.payload.searchedAddress,
         searching: false
       }
+    }
     case CLOSE_INFO_WINDOW: {
       return {
         ...state,

@@ -6,15 +6,15 @@ const storeSchema = new mongoose.Schema({
     index: true
   },
   address: {
-    type: String
+    type: String,
     required: true
   },
   place: {
-    type: String
+    type: String,
     required: true
   },
   telephone: {
-    type: String
+    type: String,
     required: true
   },
   type: {
@@ -23,7 +23,7 @@ const storeSchema = new mongoose.Schema({
     required: true
   },
   description: {
-    type: String
+    type: String,
     required: true
   },
   location: {

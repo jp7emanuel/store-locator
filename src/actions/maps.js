@@ -1,4 +1,5 @@
-import { findNearestsMarkers, findNearestMarker } from '../services/maps';
+import { findNearestsMarkers, findNearestMarker, findAddress } from '../services/maps';
+import _ from 'lodash';
 
 export const FETCH_SEARCH = 'FETCH_SEARCH';
 export const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW';
@@ -24,16 +25,20 @@ export function openInfoWindow(marker) {
 
 export function search(location, markers) {
   let nearestMarker = findNearestMarker(location, markers);
-  let locations = {
-    searchedLocation: location,
-    nearestMarker: {
-      _id: nearestMarker ? nearestMarker._id : null,
-      location: nearestMarker ? nearestMarker.location : null
-    }
-  }
 
   return dispatch => {
-    dispatch(fetchSearch(locations));
+    findAddress(location)
+      .then(response => {
+        let locations = {
+          searchedLocation: location,
+          searchedAddress: response,
+          nearestMarker: {
+            _id: nearestMarker ? nearestMarker._id : null,
+            location: nearestMarker ? nearestMarker.location : null
+          }
+        }
+        dispatch(fetchSearch(locations));
+      });
   };
 }
 

@@ -43,8 +43,7 @@ class MapsSearch extends Component {
   }
 
   render() {
-    const {searching} = this.props;
-
+    const { searching, searchedAddres } = this.props;
     return (
       <div style={styles.locationSearch}>
         { searching && (<OverlaySpinner />) }
@@ -63,6 +62,7 @@ class MapsSearch extends Component {
             placeholder="Digite um endereço..."
             onSuggestSelect={this.onSuggestSelect}
             className="search"
+            initialValue={searchedAddres ? searchedAddres : ''}
             style={styles.input}
           />
           <span className="icon" style={styles.icon}>
@@ -78,7 +78,8 @@ class MapsSearch extends Component {
 
 function mapStateToProps(state) {
   return {
-    searching: state.maps.searching
+    searching: state.maps.searching,
+    searchedAddres: state.maps.searchedAddress
   }
 }
 

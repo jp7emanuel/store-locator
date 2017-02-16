@@ -1,4 +1,12 @@
 import _ from 'lodash';
+import axios from 'axios';
+
+export function findAddress(location) {
+  return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}`)
+    .then(response => {
+      return response.data.results[0].formatted_address;
+    });
+}
 
 export function findNearestsMarkers(location, markers, maxDistanceInKm = 0) {
   let mapsLocation = getGoogleMapsCoords(location);
