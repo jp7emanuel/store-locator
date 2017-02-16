@@ -83,10 +83,21 @@
       }
     }
   }
+
   .card-header {
     background-color: $primary;
 
-    h2, a {
+    .card-header-icon {
+      background-color: white;
+      color: $primary;
+
+      &.active, &:focus, &:hover {
+        background-color: darken(white, 15%);
+        color: $darken_primary;
+      }
+    }
+
+    .card-header-title {
       color: white;
     }
   }
@@ -105,3 +116,20 @@
     }
   }
 }
+
+.filters-enter {
+  max-height: 0px;
+  -webkit-transition: max-height .5s ease;
+  overflow: hidden; }
+
+.filters-enter.filters-enter-active {
+  height: auto;
+  max-height: 100px; }
+
+.filters-leave {
+  max-height: 100px;
+  -webkit-transition: max-height .5s ease; }
+
+.filters-leave.filters-leave-active {
+  overflow: hidden;
+  max-height: 0px; }

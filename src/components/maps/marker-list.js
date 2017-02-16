@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import MapsInfoWindowContent from './info-window-content';
 import { fetchNearestsMarkers, openInfoWindow, toggleFilters, filterDistance } from '../../actions/maps';
 import MapsFilters from './filters';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class MapsMarkerList extends Component {
   componentWillMount() {
@@ -42,7 +43,8 @@ class MapsMarkerList extends Component {
         <div className="card">
           <div className="card-header">
             <h2 className="card-header-title">Lojas Mais Próximas</h2>
-            <a className="card-header-icon" onClick={this.handleFilterClick}>
+            <a className={ 'card-header-icon' + (displayFilters ? ' active' : '') } onClick={this.handleFilterClick}>
+              Filtrar
               <span className="icon">
                 <i className="fa fa-filter"></i>
               </span>
@@ -50,7 +52,18 @@ class MapsMarkerList extends Component {
           </div>
 
           <div className="card-content">
-            { displayFilters && (<MapsFilters initialValue={distanceValue} filterSelect={this.handleFilterSelect} />) }
+            <ReactCSSTransitionGroup
+              transitionName="filters"
+              transitionEnter={true}
+              transitionLeave={true}
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={500}>
+                { displayFilters &&
+                  (
+                    <MapsFilters initialValue={distanceValue} filterSelect={this.handleFilterSelect} />
+                  )
+                }
+              </ReactCSSTransitionGroup>
             {renderMakers}
           </div>
         </div>

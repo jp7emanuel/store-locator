@@ -17,7 +17,7 @@ class MapsFilters extends Component {
   render() {
     const { initialValue } = this.props;
     return (
-      <div>
+      <div style={{ marginTop: 10, marginLeft: 10 }}>
          <label className="label">Distância Máxima</label>
           <p className="control center" >
             <span className="select">
