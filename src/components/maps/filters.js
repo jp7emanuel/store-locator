@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 const selectOptions = [
   { label: 'Todas as distâncias', value: 0 },
@@ -10,6 +10,11 @@ const selectOptions = [
 ]
 
 class MapsFilters extends Component {
+  static PropTypes = {
+    initialValue: PropTypes.object.isRequired,
+    filterSelect: PropTypes.func.isRequired
+  }
+
   handleChangeSelect = (event) => {
     this.props.filterSelect(event.target.value);
   }

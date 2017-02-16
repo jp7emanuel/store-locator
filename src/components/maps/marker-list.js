@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import MapsInfoWindowContent from './info-window-content';
 import { fetchNearestsMarkers, openInfoWindow, toggleFilters, filterDistance } from '../../actions/maps';
@@ -6,6 +6,12 @@ import MapsFilters from './filters';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class MapsMarkerList extends Component {
+
+  static PropTypes = {
+    markers: PropTypes.arrayOf(PropTypes.object).isRequired,
+    searchedLocation: PropTypes.object.isRequired,
+  }
+
   componentWillMount() {
     this.props.fetchNearestsMarkers(this.props.searchedLocation, this.props.markers);
   }

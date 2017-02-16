@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {search, requestSearching} from '../../actions/maps';
 import Geosuggest from 'react-geosuggest';
@@ -7,6 +7,11 @@ import OverlaySpinner from '../loadings/spinner';
 import ReduxSweetAlert, { showAlert, dismissAlert } from 'react-redux-sweetalert';
 
 class MapsSearch extends Component {
+
+  static propTypes = {
+    markers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }
+
   onSuggestSelect = (suggest) => {
     if (suggest.location) {
       this.props.requestSearching();

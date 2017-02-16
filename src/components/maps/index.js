@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { openInfoWindow, closeInfoWindow } from '../../actions/maps';
 import MapsInfoWindowContent from './info-window-content';
@@ -8,6 +8,12 @@ import _ from 'lodash';
 import MapsMarkerList from './marker-list';
 
 class MapsIndex extends Component {
+  static propTypes = {
+    markers: PropTypes.arrayOf(PropTypes.object).isRequired,
+    location: PropTypes.object.isRequired,
+    searchedLocation: PropTypes.object.isRequired,
+  }
+
   handleMarkerClick = (marker) => {
     this.props.openInfoWindow(marker);
   }

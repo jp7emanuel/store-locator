@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import _ from 'lodash';
@@ -39,6 +39,11 @@ const maskTelephone = (value) => {
 }
 
 class StoresForm extends Component {
+
+  static propTypes = {
+    initialValues: PropTypes.object,
+    onSubmit: PropTypes.func.isRequired
+  }
 
   componentWillMount() {
     this.props.requestStoreTypes();

@@ -1,7 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {styles} from './styles';
 
 class MapsInfoWindowContent extends Component {
+  static PropTypes = {
+    marker: PropTypes.object.isRequired,
+    searchedLocation: PropTypes.object.isRequired,
+    clickedMarker: PropTypes.func
+  }
+
   render() {
     const { marker, searchedLocation, clickedMarker } = this.props;
     return (
