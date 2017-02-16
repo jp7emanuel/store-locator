@@ -1,19 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import MapsInfoWindowContent from './info-window-content';
-import { fetchNearestsMarkers, openInfoWindow, toggleFilters, filterDistance } from '../../actions/maps';
+import { openInfoWindow, toggleFilters, filterDistance } from '../../actions/maps';
 import MapsFilters from './filters';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {filterMarkersByDistance} from '../../services/maps';
 
 class MapsMarkerList extends Component {
 
   static PropTypes = {
-    markers: PropTypes.arrayOf(PropTypes.object).isRequired,
-    searchedLocation: PropTypes.object.isRequired,
-  }
-
-  componentWillMount() {
-    this.props.fetchNearestsMarkers(this.props.searchedLocation, this.props.markers);
+    nearestMarkers: PropTypes.arrayOf(PropTypes.object).isRequired
   }
 
   handleMarkerClick = (marker) => {
@@ -25,21 +21,21 @@ class MapsMarkerList extends Component {
   }
 
   handleFilterSelect = (value) => {
-    this.props.filterDistance(this.props.searchedLocation, this.props.markers, value);
+    this.props.filterDistance(this.props.nearestMarkers, value);
   }
 
   render() {
-    const { nearestsMarkers, searchedLocation, displayFilters, distanceValue } = this.props;
+    const { nearestMarkers, searchedLocation, displayFilters, distanceValue } = this.props;
 
-    if (!nearestsMarkers) {
+    if (!nearestMarkers) {
       return <div> Loading... </div>;
     }
 
-    const renderMakers = nearestsMarkers.map((marker, key) => {
+    const renderMakers = filterMarkersByDistance(nearestMarkers, distanceValue).map((marker, key) => {
       return (
         <div key={marker._id}>
           <MapsInfoWindowContent marker={marker} searchedLocation={searchedLocation} clickedMarker={this.handleMarkerClick} />
-          { key !== (nearestsMarkers.length-1) ? <hr/> : "" }
+          { key !== (nearestMarkers.length-1) ? <hr/> : "" }
         </div>
       );
     });
@@ -70,7 +66,8 @@ class MapsMarkerList extends Component {
                   )
                 }
               </ReactCSSTransitionGroup>
-            {renderMakers}
+
+              {renderMakers}
           </div>
         </div>
       </div>
@@ -80,11 +77,10 @@ class MapsMarkerList extends Component {
 
 function mapStateToProps(state) {
   return {
-    nearestsMarkers: state.maps.nearestsMarkers,
     displayFilters: state.maps.displayFilters,
     distanceValue: state.maps.filters.distance
   }
 }
 
 
-export default connect(mapStateToProps, { fetchNearestsMarkers, openInfoWindow, toggleFilters, filterDistance })(MapsMarkerList);
+export default connect(mapStateToProps, { openInfoWindow, toggleFilters, filterDistance })(MapsMarkerList);

@@ -3,7 +3,6 @@ import {
   FETCH_SEARCH,
   CLOSE_INFO_WINDOW,
   OPEN_INFO_WINDOW,
-  FETCH_NEARESTSMARKERS,
   TOGGLE_FILTERS,
   FILTER_DISTANCE
 } from '../actions/maps';
@@ -14,7 +13,7 @@ const INITIAL_STATE = {
   searchedLocation: null,
   searchedAddress: null,
   openedMarker: null,
-  nearestsMarkers: [],
+  nearestMarkers: [],
   filters: {
     distance: 0
   },
@@ -36,6 +35,7 @@ export default function (state = INITIAL_STATE, action) {
         location: action.payload.nearestMarker.location,
         searchedLocation: action.payload.searchedLocation,
         searchedAddress: action.payload.searchedAddress,
+        nearestMarkers: action.payload.nearestMarkers,
         searching: false
       }
     }
@@ -52,12 +52,6 @@ export default function (state = INITIAL_STATE, action) {
         location: action.payload.location
       }
     }
-    case FETCH_NEARESTSMARKERS: {
-      return {
-        ...state,
-        nearestsMarkers: action.payload
-      }
-    }
     case TOGGLE_FILTERS: {
       return {
         ...state,
@@ -70,8 +64,7 @@ export default function (state = INITIAL_STATE, action) {
         filters: {
           ...state.filters,
           distance: action.payload.selectedValue
-        },
-        nearestsMarkers: action.payload.nearestsMarkers
+        }
       }
     }
     default:

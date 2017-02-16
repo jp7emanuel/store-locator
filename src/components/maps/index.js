@@ -29,7 +29,7 @@ class MapsIndex extends Component {
   }
 
   render() {
-    const { markers, location, openedMarker, searchedLocation } = this.props;
+    const { markers, nearestMarkers, location, openedMarker, searchedLocation } = this.props;
 
     const renderMarkers = markers.map(marker => {
       return (
@@ -72,7 +72,7 @@ class MapsIndex extends Component {
             {renderInfoWindows}
         </Gmaps>
 
-        <MapsMarkerList markers={markers} searchedLocation={searchedLocation}  />
+        <MapsMarkerList nearestMarkers={nearestMarkers} searchedLocation={searchedLocation} />
       </div>
     );
   }
@@ -80,9 +80,9 @@ class MapsIndex extends Component {
 
 function mapStateToProps(state) {
   return {
-    openedMarker: state.maps.openedMarker
+    openedMarker: state.maps.openedMarker,
+    nearestMarkers: state.maps.nearestMarkers
   }
 }
-
 
 export default connect(mapStateToProps, { openInfoWindow, closeInfoWindow })(MapsIndex);

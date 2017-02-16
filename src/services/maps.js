@@ -8,7 +8,7 @@ export function findAddress(location) {
     });
 }
 
-export function findNearestsMarkers(location, markers, maxDistanceInKm = 0) {
+export function findNearestMarkers(location, markers, maxDistance = 0) {
   let mapsLocation = getGoogleMapsCoords(location);
 
   markers.map(marker => {
@@ -17,15 +17,17 @@ export function findNearestsMarkers(location, markers, maxDistanceInKm = 0) {
 
   let cursorMarker = _(markers).sortBy('distance');
 
-  if (maxDistanceInKm > 0) {
-    cursorMarker = cursorMarker.filter(marker => marker.distance <= maxDistanceInKm);
-  }
+  cursorMarker = filterMarkersByDistance(cursorMarker, maxDistance);
 
   return cursorMarker.value();
 }
 
-export function findNearestMarker(location, markers) {
-  return findNearestsMarkers(location, markers)[0];
+export function filterMarkersByDistance(markers, maxDistance) {
+  if (maxDistance > 0) {
+    return markers.filter(marker => marker.distance <= maxDistance);
+  }
+
+  return markers;
 }
 
 function getGoogleMapsCoords(location) {

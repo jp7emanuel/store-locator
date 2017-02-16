@@ -1,11 +1,10 @@
-import { findNearestsMarkers, findNearestMarker, findAddress } from '../services/maps';
+import { findNearestMarkers, findAddress } from '../services/maps';
 import _ from 'lodash';
 
 export const FETCH_SEARCH = 'FETCH_SEARCH';
 export const CLOSE_INFO_WINDOW = 'CLOSE_INFO_WINDOW';
 export const OPEN_INFO_WINDOW = 'OPEN_INFO_WINDOW';
 export const REQUEST_SEARCHING = 'REQUEST_SEARCHING';
-export const FETCH_NEARESTSMARKERS = 'FETCH_NEARESTSMARKERS';
 export const TOGGLE_FILTERS = 'TOGGLE_FILTERS';
 export const FILTER_DISTANCE = 'FILTER_DISTANCE';
 
@@ -23,8 +22,8 @@ export function openInfoWindow(marker) {
   }
 }
 
-export function search(location, markers) {
-  let nearestMarker = findNearestMarker(location, markers);
+export function search(location, markers, ) {
+  let nearestMarkers = findNearestMarkers(location, markers);
 
   return dispatch => {
     findAddress(location)
@@ -33,9 +32,10 @@ export function search(location, markers) {
           searchedLocation: location,
           searchedAddress: response,
           nearestMarker: {
-            _id: nearestMarker ? nearestMarker._id : null,
-            location: nearestMarker ? nearestMarker.location : null
-          }
+            _id: nearestMarkers[0] ? nearestMarkers[0]._id : null,
+            location: nearestMarkers[0] ? nearestMarkers[0].location : null
+          },
+          nearestMarkers: nearestMarkers
         }
         dispatch(fetchSearch(locations));
       });
@@ -55,25 +55,16 @@ export function requestSearching() {
   };
 }
 
-export function fetchNearestsMarkers(location, markers) {
-  let nearestsMarkers = findNearestsMarkers(location, markers);
-  return {
-    type: FETCH_NEARESTSMARKERS,
-    payload: nearestsMarkers
-  }
-}
-
 export function toggleFilters() {
   return {
     type: TOGGLE_FILTERS
   }
 }
 
-export function filterDistance(location, markers, value) {
+export function filterDistance(markers, value) {
   return {
     type: FILTER_DISTANCE,
     payload: {
-      nearestsMarkers: findNearestsMarkers(location, markers, value),
       selectedValue: value
     }
   }
