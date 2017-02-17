@@ -25,7 +25,8 @@ export default function (state = INITIAL_STATE, action) {
     case REQUEST_SEARCHING: {
       return {
         ...state,
-        searching: true
+        searching: true,
+        searchedAddress: INITIAL_STATE.searchedAddress
       };
     }
     case FETCH_SEARCH: {
@@ -36,13 +37,13 @@ export default function (state = INITIAL_STATE, action) {
         searchedLocation: action.payload.searchedLocation,
         searchedAddress: action.payload.searchedAddress,
         nearestMarkers: action.payload.nearestMarkers,
-        searching: false
+        searching: INITIAL_STATE.searching
       }
     }
     case CLOSE_INFO_WINDOW: {
       return {
         ...state,
-        openedMarker: null
+        openedMarker: INITIAL_STATE.openedMarker
       }
     }
     case OPEN_INFO_WINDOW: {

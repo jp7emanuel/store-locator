@@ -14,27 +14,27 @@ export default function (state = INITIAL_STATE, action) {
       return {
         ...state,
         fetching: true,
-        fetched: false
+        fetched: INITIAL_STATE.fetched
       };
     case REQUEST_REJECTED:
       return {
         ...state,
-        fetching: false,
-        fetched: false,
+        fetching: INITIAL_STATE.fetching,
+        fetched: INITIAL_STATE.fetched,
         error: action.payload.data
       };
     case FETCH_STORES:
       return {
         ...state,
         all: action.payload,
-        fetching: false,
+        fetching: INITIAL_STATE.fetching,
         fetched: true
       }
     case FETCH_STORE:
       return {
         ...state,
         store: action.payload,
-        fetching: false,
+        fetching: INITIAL_STATE.fetching,
         fetched: true
       }
     case UPDATE_STORE:
