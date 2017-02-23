@@ -8,7 +8,7 @@ import { requestStores } from '../../actions/stores';
 function renderImage() {
   return (
     <figure className="image is-2by1">
-      <img alt="Background" src="/img/background.jpg" />
+      <img alt="Background" src="/img/background.png" />
     </figure>
   );
 }
